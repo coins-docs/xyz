@@ -37,17 +37,9 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 * Too many requests; current limit is %s requests per minute. Please use the websocket for live updates to avoid polling the API.
 * Way too many requests; IP banned until %s. Please use the websocket for live updates to avoid bans.
 
-### -1006 UNEXPECTED_RESP
+### -1010 BAD_REQUEST
 
-* An unexpected response was received from the message bus. Execution status unknown. OPEN API server find some exception in execute request .Please report to Customer service.
-
-### -1007 TIMEOUT
-
-* Timeout waiting for response from backend server. Send status unknown; execution status unknown.
-
-### -1014 UNKNOWN_ORDER_COMPOSITION
-
-* Unsupported order combination.
+* Bad request
 
 ### -1015 TOO_MANY_ORDERS
 
@@ -55,15 +47,11 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 * Too many new orders.
 * Too many new orders; current limit is %s orders per %s.
 
-### -1016 SERVICE_SHUTTING_DOWN
-
-* This service is no longer available.
-
 ### -1020 UNSUPPORTED_OPERATION
 
 * This operation is not supported.
 
-### -1021 INVALID_TIMESTAMP
+### -1021 TIMESTAMP_OUT_OF_WINDOW
 
 * Timestamp for this request is outside of the recvWindow.
 * Timestamp for this request was 1000ms ahead of the server's time.
@@ -77,56 +65,42 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 * Please set IP whitelist before using API.
 
-### -1024 INVALID_RECVWINDOW
+### -1024 MISS_HEADER_ERROR
 
-* recvWindow is not valid.
+* Header '%s' is required.
 
-### -1025 TOO_BIG_RECVWINDOW
+### -1025 INVALID_PARAMETER
 
-* recvWindow cannot be greater than 60000.
+* Parameter '%s' is not valid.
 
-### -1030 ERR_UPSTREAM_BUSINESS
+### -1026 CREATE_LISTEN_KEY_RATE_LIMIT
 
-* Business error.
+* Create listenKey rate limited(%s per hour), please try again next hour
+
+### -1027 INVALID_ORG_ID
+
+* This api only support for coins.ph
 
 ## 11xx - Request issues
 
-### -1100 ILLEGAL_CHARS
-
-* Illegal characters found in a parameter.
-* Illegal characters found in parameter '%s'; legal range is '%s'.
-
-### -1101 TOO_MANY_PARAMETERS
-
-* Too many parameters sent for this endpoint.
-* Too many parameters; expected '%s' and received '%s'.
-* Duplicate values for a parameter detected.
-
-### -1102 MANDATORY_PARAM_EMPTY_OR_MALFORMED
-
-* A mandatory parameter was not sent, was empty/null, or malformed.
-* Mandatory parameter '%s' was not sent, was empty/null, or malformed.
-* Param '%s' or '%s' must be sent, but both were empty/null!
-
 ### -1103 UNKNOWN_PARAM
 
-* An unknown parameter was sent.
-* In BHEx Open Api , each request requires at least one parameter. {Timestamp}.
+* Required param not found, please ensure the parameters being sent correctly, more information please refer to the openapi documentation 'SIGNED Endpoint Examples' section.
 
-### -1104 UNREAD_PARAMETERS
-
-* Not all sent parameters were read.
-* Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.
-
-### -1105 PARAM_EMPTY
+### -1105 MISS_PARAMETER
 
 * A parameter was empty.
-* Parameter '%s' was empty.
+* Parameter '%s' is required.
 
-### -1106 PARAM_NOT_REQUIRED
+### -1106 PARAMETER_NOT_REQUIRED
 
 * A parameter was sent when not required.
 * Parameter '%s' sent when not required.
+
+### -1107 CONFLICT_PARAMETER_ERROR
+
+* A parameter was sent when not required.
+* Parameter '%s' should not be both set.
 
 ### -1111 BAD_PRECISION
 
