@@ -83,213 +83,56 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 ### -1105 MISS_PARAMETER
 
-* A parameter was empty.
 * Parameter '%s' is required.
 
 ### -1106 PARAMETER_NOT_REQUIRED
 
-* A parameter was sent when not required.
-* Parameter '%s' sent when not required.
+* Parameter '%s' sent when not required
 
 ### -1107 CONFLICT_PARAMETER_ERROR
 
-* A parameter was sent when not required.
 * Parameter '%s' should not be both set.
 
-### -1111 BAD_PRECISION
+### -1108 ORDER_CANCEL_REPLACE_PARAMETER_ERROR
 
-* Precision is over the maximum defined for this asset.
+* Either the cancelOrigClientOrderId or cancelOrderId must be provided
 
-### -1112 NO_DEPTH
+### -1125 LISTEN_KEY_EXPIRED
 
-* No orders on book for symbol.
+* This listenKey does not exist
 
-### -1114 TIF_NOT_REQUIRED
+### -1126 CREATE_LISTEN_KEY_FAILED
 
-* TimeInForce parameter sent when not required.
-
-### -1115 INVALID_TIF
-
-* Invalid timeInForce.
-* In the current version, this parameter is either empty or GTC.
-
-### -1116 INVALID_ORDER_TYPE
-
-* Invalid orderType.
-* In the current version , ORDER_TYPE values is LIMIT or MARKET.
-
-### -1117 INVALID_SIDE
-
-* Invalid side.
-* ORDER_SIDE values is BUY or SELL
-
-### -1118 EMPTY_NEW_CL_ORD_ID
-
-* New client order ID was empty.
-
-### -1119 EMPTY_ORG_CL_ORD_ID
-
-* Original client order ID was empty.
-
-### -1120 BAD_INTERVAL
-
-* Invalid interval.
-
-### -1121 BAD_SYMBOL
-
-* Invalid symbol.
-
-### -1122 INVALID_NEW_ORDER_RES_TYPE
-
-* Invalid newOrderRespType.
-
-### -1125 INVALID_LISTEN_KEY
-
-* This listenKey does not exist.
-
-### -1127 MORE_THAN_XX_HOURS
-
-* Lookup interval is too big.
-* More than %s hours between startTime and endTime.
-
-### -1128 OPTIONAL_PARAMS_BAD_COMBO
-
-* Combination of optional parameters invalid.
-
-### -1130 INVALID_PARAMETER
-
-* Invalid data sent for a parameter.
-* Data sent for paramter '%s' is not valid.
+* Create listenKey failed, please try again later
 
 ### -1131 INSUFFICIENT_BALANCE
 
-* Balance insufficient.
+* Balance insufficient
 
-### -1132 ORDER_PRICE_TOO_HIGH
+### -1132 ORDER_CANCEL_REPLACE_FAILED
 
-* Order price too high.
+* Order cancel-replace failed.
 
-### -1133 ORDER_PRICE_TOO_SMALL
+### -1133 ORDER_CANCEL_REPLACE_PARTIALLY_FAILED
 
-* Order price lower than the minimum,please check general broker info.
+* Order cancel-replace partially failed.
 
-### -1134 ORDER_PRICE_PRECISION_TOO_LONG
+### -1150 MERCHANT_AUTHENTICATION_FAIL
 
-* Order price decimal too long,please check general broker info.
+* merchant authentication failed.
 
-### -1135 ORDER_QUANTITY_TOO_BIG
+### -1151 USER_NOT_FOUND
 
-* Order quantity too large.
+* merchant user not found
 
-### -1136 ORDER_QUANTITY_TOO_SMALL
+### -1152 NO_PERMISSION
 
-* Order quantity lower than the minimum.
-
-### -1137 ORDER_QUANTITY_PRECISION_TOO_LONG
-
-* Order quantity decimal too long.
-
-### -1138 ORDER_PRICE_WAVE_EXCEED
-
-* Order price exceeds permissible range.
-
-### -1139 ORDER_HAS_FILLED
-
-* Order has been filled.
-
-### -1140 ORDER_AMOUNT_TOO_SMALL
-
-* Transaction amount lower than the minimum.
-
-### -1141 ORDER_DUPLICATED
-
-* Duplicate clientOrderId
-
-### -1142 ORDER_CANCELLED
-
-* Order has been canceled
-
-### -1143 ORDER_NOT_FOUND_ON_ORDER_BOOK
-
-* Cannot be found on order book
-
-### -1144 ORDER_LOCKED
-
-* Order has been locked
-
-### -1145 ORDER_NOT_SUPPORT_CANCELLATION
-
-* This order type does not support cancellation
-
-### -1146 ORDER_CREATION_TIMEOUT
-
-* Order creation timeout
-
-### -1147 ORDER_CANCELLATION_TIMEOUT
-
-* Order cancellation timeout
-
-### -1148 ORDER_AMOUNT_PRECISION_TOO_LONG
-
-* Market order amount decimal too long
-
-
-### -1149 CREATE_ORDER_FAILED
-
-* Create order failed
-
-### -1150 CANCEL_ORDER_FAILED
-
-* Cancel order failed
-
-### -1151 SYMBOL_PROHIBIT_ORDER
-
-* The trading pair is not open yet
-
-### -1152 COMING_SOON
-
-* Coming soon
-
-### -1153 USER_NOT_EXIST
-
-* User not exist
-
-### -1154 INVALID_PRICE_TYPE
-
-* Invalid price type
-
-### -1155 INVALID_POSITION_SIDE
-
-* Invalid position side
-
-### -1156 ORDER_QUANTITY_INVALID
-
-* Order quantity invalid
-
-### -1157 SYMBOL_API_TRADING_NOT_AVAILABLE
-
-* The trading pair is not available for api trading
-
-### -1158 CREATE_LIMIT_MAKER_ORDER_FAILED
-
-* create limit maker order failed
-
-### -1159 PLAN_SPOT_ORDER_TRADE_IMMEDIATELY
-
-* STOP_LOSS/TAKE_PROFIT order is not allowed to trade immediately
-
-### -1160 ERROR_MODIFY_MARGIN
-
-* Modify futures margin error
-
-### -1161 REDUCE_MARGIN_FORBIDDEN
-
-* Reduce margin forbidden
+* Unauthorized to operate this API.
 
 
 ### -2010 NEW_ORDER_REJECTED
 
-* NEW_ORDER_REJECTED
+* New order rejected.
 
 ### -2011 CANCEL_REJECTED
 
