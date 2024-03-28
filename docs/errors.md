@@ -5,37 +5,35 @@ layout: default
 nav: sidebar/errors.html
 
 ---
-# Error codes for Coins (2024-03-27)
+# Error codes for Coins (2024-03-28)
 
 Errors consist of two parts: an error code and a message. Codes are universal,
  but messages can vary. Here is the error JSON payload:
 
 ```javascript
 {
-  "code":-1121,
-  "msg":"Invalid symbol."
+  "code":-1000,
+  "msg":"An unknown error occurred while processing the request."
 }
 ```
 
 ## 10xx - General Server or Network issues
 
-### -1000 UNKNOWN
+### -1000 UNKNOWN_ERROR
 
-* An unknown error occured while processing the request.
+* An unknown error occurred while processing the request.
 
 ### -1001 DISCONNECTED
 
-* Internal error; unable to process your request. Please try again.
+* Internal error.
 
 ### -1002 UNAUTHORIZED
 
-* You are not authorized to execute this request. Request need API Key included in . We suggest that API Key be included in any request.
+* You are not authorized to execute this request
 
 ### -1003 TOO_MANY_REQUESTS
 
-* Too many requests; please use the websocket for live updates.
-* Too many requests; current limit is %s requests per minute. Please use the websocket for live updates to avoid polling the API.
-* Way too many requests; IP banned until %s. Please use the websocket for live updates to avoid bans.
+* Too many requests, current limit is %s requests per %s.
 
 ### -1010 BAD_REQUEST
 
@@ -43,8 +41,6 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 ### -1015 TOO_MANY_ORDERS
 
-* Reach the rate limit .Please slow down your request speed.
-* Too many new orders.
 * Too many new orders; current limit is %s orders per %s.
 
 ### -1020 UNSUPPORTED_OPERATION
@@ -53,9 +49,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 ### -1021 TIMESTAMP_OUT_OF_WINDOW
 
-* Timestamp for this request is outside of the recvWindow.
-* Timestamp for this request was 1000ms ahead of the server's time.
-* Please check the difference between your local time and server time .
+* Timestamp for this request is outside of the recv window.
 
 ### -1022 INVALID_SIGNATURE
 
@@ -63,7 +57,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 ### -1023 BIND_IP_WHITE_LIST_FIRST
 
-* Please set IP whitelist before using API.
+* set ip white_list before use
 
 ### -1024 MISS_HEADER_ERROR
 
@@ -79,7 +73,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 ### -1027 INVALID_ORG_ID
 
-* This api only support for coins.ph
+* This api only support for coins.ph.
 
 ## 11xx - Request issues
 
