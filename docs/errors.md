@@ -75,6 +75,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 * This api only support for coins.ph.
 
+
 ## 11xx - Request issues
 
 ### -1103 UNKNOWN_PARAM
