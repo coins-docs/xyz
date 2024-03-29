@@ -8,6 +8,8 @@ nav: sidebar/rest-api.html
 
 
 # Change log:
+2024-02-19: Added the `openapi/v1/user/ip` interface.
+
 2023-12-29: Added kyc remaining and limit to the `/openapi/v1/account` endpoint.
 
 2023-09-20: Added the `message` parameter to the `/openapi/transfer/v3/transfers` endpoint.
@@ -48,15 +50,13 @@ nav: sidebar/rest-api.html
 
 2022-08-12: Changed `maxNumAlgoOrders` to 5 in `filter MAX_NUM_ALGO_ORDERS`.
 
-2024-02-19: Added the `openapi/v1/user/ip` interface.
-
 <!--more-->
 
 # Public Rest API for Coins (2022-09-12)
 
 ## General API Information
 
-* The base endpoint is: **https://api.pro.coins.ph**
+* The base endpoint is: **https://api.coins.xyz**
 * All endpoints return data in either a JSON object or array format.
 * Data is returned in **ascending** order, with the oldest records appearing first and the newest records appearing last.
 * All time and timestamp related fields are expressed in milliseconds.
@@ -73,8 +73,8 @@ nav: sidebar/rest-api.html
 
 ```javascript
 {
-  "code": -1121,
-  "msg": "Invalid symbol."
+  "code":-1000,
+  "msg":"An unknown error occurred while processing the request."
 }
 ```
 
