@@ -30,7 +30,7 @@ nav: sidebar/rest-api.html
 
 2023-05-08: Added the following endpoints: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`. The endpoints are still in QA and are appropriately marked as such.
 
-2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history` and `openapi/fiat/v1/history`; removed a personal detail from a code sample in `/openapi/fiat/v1/details`. 
+2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history`. 
 
 2023-04-13: Added the `invoice` interface.
 
