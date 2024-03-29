@@ -8,7 +8,7 @@ nav: sidebar/rest-api.html
 
 
 # Change log:
-2024-02-19: Added the `openapi/v1/user/ip` interface.
+2024-02-19: Added the `openapi/v1/user/ip` endpoint.
 
 2023-12-29: Added kyc remaining and limit to the `/openapi/v1/account` endpoint.
 
