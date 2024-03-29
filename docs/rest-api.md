@@ -73,8 +73,8 @@ nav: sidebar/rest-api.html
 
 ```javascript
 {
-  "code":-1000,
-  "msg":"An unknown error occurred while processing the request."
+  "code": -1000,
+  "msg": "An unknown error occurred while processing the request."
 }
 ```
 
