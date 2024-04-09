@@ -89,7 +89,7 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "Rest-Api":
-    - "/rest-api"
+    - "/xyz/rest-api"
   "Web-Socket-Streams":
     - "/web-socket-streams"
   "User-Data-Stream":
