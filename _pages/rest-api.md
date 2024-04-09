@@ -2632,7 +2632,7 @@ Name            | Type    | Mandatory | Description
         "fiatAmount":"45",
         "transactionType":-1,
         "transactionChannel":"INSTAPAY",
-        "transactionSubject":"coins.ph",
+        "transactionSubject":"coins.xyz",
         "transactionChannelName":"instapay",
         "transactionSubjectName":"DCPAY PHILIPPINES, INC.",
         "transactionSubjectType":"bank",
@@ -2645,7 +2645,7 @@ Name            | Type    | Mandatory | Description
         "completedTime":"2023-03-20T12:39:03.000+00:00",
         "source":"WEB",
         "createdAt":"2023-03-20T12:39:00.000+00:00",
-        "channelSubject":"coins.ph",
+        "channelSubject":"coins.xyz",
         "userId":1198653352181844736,
         "orgId":9001
      },
@@ -2686,7 +2686,7 @@ Name            | Type   | Mandatory | Description
             "fiatAmount": "60",
             "transactionType": -1,
             "transactionChannel": "INSTAPAY",
-            "transactionSubject": "coins.ph",
+            "transactionSubject": "coins.xyz",
             "transactionSubjectType": "bank",
             "transactionChannelName": "instapay",
             "transactionSubjectName": "DCPAY PHILIPPINES, INC.",
@@ -2707,7 +2707,7 @@ Name            | Type   | Mandatory | Description
               "channelName": "INSTAPAY",
               "currency": "PHP",
               "source": "WEB",
-              "channelSubject": "coins.ph",
+              "channelSubject": "coins.xyz",
               "userId": 1326887193348759809,
               "orgId": 9001
     },
@@ -2716,7 +2716,7 @@ Name            | Type   | Mandatory | Description
 }
 ```
 ------
-### Old endpoints from coins.ph (Legacy)
+### Old endpoints from coins.xyz (Legacy)
 
 #### Create a new sellorder
 ```shell
