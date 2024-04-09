@@ -23,13 +23,13 @@ main:
   # - title: "Quick-Start Guide"
   #   url: /docs/quick-start-guide/
   - title: "Rest API"
-    url: /rest-api/
+    url: /xyz/rest-api/
   - title: "User-Data-Stream"
-    url: /user-data-stream/
+    url: /xyz/user-data-stream/
   - title: "Web-Socket-Streams"
-    url: /web-socket-streams/
+    url: /xyz/web-socket-streams/
   - title: "Errors"
-    url: /errors/ 
+    url: /xyz/errors/ 
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
