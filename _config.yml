@@ -91,11 +91,11 @@ aux_links:
   "Rest-Api":
     - "/xyz/rest-api"
   "Web-Socket-Streams":
-    - "/web-socket-streams"
+    - "/xyz/web-socket-streams"
   "User-Data-Stream":
-    - "/user-data-stream"
+    - "/xyz/user-data-stream"
   "Errors":
-    - "/errors"
+    - "/xyz/errors"
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
 
