@@ -12,7 +12,7 @@
 
   {% include favicon.html %}
 
-  <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/xyz/assets/css/just-the-docs-default.css' | relative_url }}">
   
   {% if site.ga_tracking != nil %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking }}"></script>
@@ -27,14 +27,14 @@
   {% endif %}
 
   {% if site.search_enabled != false %}
-    <script src="{{ '/assets/js/vendor/lunr.min.js' | relative_url }}"></script>
+    <script src="{{ '/xyz/assets/js/vendor/lunr.min.js' | relative_url }}"></script>
   {% endif %}
 
   {% if site.mermaid %}
     <script src="https://cdn.jsdelivr.net/npm/mermaid@{{ site.mermaid.version }}/dist/mermaid.min.js"></script>
   {% endif %}
 
-  <script src="{{ '/assets/js/just-the-docs.js' | relative_url }}"></script>
+  <script src="{{ '/xyz/assets/js/just-the-docs.js' | relative_url }}"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
