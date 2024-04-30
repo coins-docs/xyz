@@ -2831,7 +2831,7 @@ size | int    | No |
   "total": 23
 }
 ```
-------
+
 #### Query balance (USER_DATA)
 
 ```shell
