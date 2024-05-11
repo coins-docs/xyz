@@ -6,12 +6,6 @@ layout: default
 ---
 
 
-# Change Log
-2023-07-15: update `balanceUpdate` trigger condition
-
-2022-08-19: add weight infomation for all interfaces
-
-
 # User Data Streams for Coins (2022-08-19)
 
 ## General WSS information
