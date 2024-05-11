@@ -7,57 +7,6 @@ nav: sidebar/rest-api.html
 ---
 
 
-# Change log:
-2024-04-29: Added the `inversePrice` response parameter to the `/openapi/convert/query-order-history` endpoint.
-
-2024-04-24: Add <a href="#sub-account-endpoints">Sub-account</a> endpoints : `/openapi/v1/sub-account/list`,`/openapi/v1/sub-account/create`,`/openapi/v1/sub-account/asset`,`/openapi/v1/sub-account/transfer/universal-transfer`,`/openapi/v1/sub-account/transfer/sub-to-master`,`/openapi/v1/sub-account/transfer/universal-transfer-history`,`/openapi/v1/sub-account/transfer/sub-history`,`/openapi/v1/sub-account/apikey/ip-restriction`,`/openapi/v1/sub-account/apikey/add-ip-restriction`,`/openapi/v1/sub-account/apikey/delete-ip-restriction`
-
-2024-04-17: Added the `targetAmount` parameter to the `/openapi/convert/v1/get-quote` endpoint.
-
-2024-02-19: Added the `openapi/v1/user/ip` endpoint.
-
-2023-12-29: Added kyc remaining and limit to the `/openapi/v1/account` endpoint.
-
-2023-09-20: Added the `message` parameter to the `/openapi/transfer/v3/transfers` endpoint.
-
-2023-08-30: Added `/openapi/convert/v1/query-order-history` docs.
-
-2023-08-17: Updated `/openapi/convert/v1/accept-quote` docs.
-
-2023-07-15: Updated `MARKET order type now supports quantity for buy and quoteOrderQty for sell` 
-
-2023-07-15: Added  `stpFlag` in the request of New order (TRADE) endpoint for anti self-trading behaviour.
-
-2023-07-15: Added order status `EXPIRED`.
-
-2023-06-08: Added the `payment request` interface.
-
-2023-05-17: The disclaimer regarding the following endpoints being in the QA phase has been removed as the QA process has been successfully completed: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`.
-
-2023-05-08: Added the following endpoints: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`. The endpoints are still in QA and are appropriately marked as such.
-
-2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history`. 
-
-2023-04-13: Added the `invoice` interface.
-
-2023-04-10: Added the `transfer` interfaces.
-
-2022-09-12: Modified the `symbol` in the `Cancel All Open Orders on a Symbol` API request as required.
-
-2022-09-09: Changed the `orderId/transactTime/time/updateTime` response from string to number in order related interfaces.
-
-2022-08-24: Updated the `STOP_LOSS/TAKE_PROFIT` description in the `New order (TRADE)` API.
-
-2022-08-23: Fixed incorrect depth information.
-
-2022-08-19: Added weight information for all interfaces.
-
-2022-08-12: Changed `maxNumOrders` to 200 in `filter MAX_NUM_ORDERS`.
-
-2022-08-12: Changed `maxNumAlgoOrders` to 5 in `filter MAX_NUM_ALGO_ORDERS`.
-
-<!--more-->
-
 # Public Rest API for Coins (2022-09-12)
 
 ## General API Information
