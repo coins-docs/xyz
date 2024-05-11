@@ -7,17 +7,6 @@ layout: default
 
 
 
-# Change Log
-
-2023-07-15: update `Partial Book Depth`  support 200 levels and Update Speed.
-
-2022-10-11: add field as symbol,eventType,eventTime to Partial Depth Stream.
-
-2022-08-24: change /ws/ to /openapi/quote/ws 
-
-2022-08-19: add ping frame
-
-
 # Web Socket Streams for coins (2022-08-15)
 # General WSS information
 * The base endpoint is: **wsapi.coins.xyz**
