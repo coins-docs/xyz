@@ -373,7 +373,7 @@ Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 
 **Payload:**
 ```javascript
 {
-  "s": "XRPPHP",         //symbol
+  "s": "XRPUSD",         //symbol
   "e": "depth",          //eventType
   "E": 1665484484791,    //eventTime
   "lastUpdateId": 160,  // Last update ID
