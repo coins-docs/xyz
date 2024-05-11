@@ -1946,7 +1946,7 @@ timestamp | LONG | YES |
       "locked": "0.00000000"
     }
   ],
-  "token": "PHP",
+  "token": "USD",
    "daily": {
       "cashInLimit": "10000",
       "cashInRemaining": "10000",
@@ -2113,7 +2113,7 @@ GET /openapi/v1/capital/deposit/history
 ```javascript
 [
     {
-        "coin": "PHP",
+        "coin": "USD",
         "address": "Internal Transfer",
         "addressTag": "Internal Transfer",
         "amount": "0.02",
@@ -2234,7 +2234,7 @@ Initiate a new payment transaction by creating a payment request.
 Name              | Type  | Mandatory | Description
 -----------------|-------|----------|--------------------------------------------------------------------------------------
 payer_contact_info            | STRING | YES      | The contact information, typically an email address, to which the payment request should be sent.
-receiving_account | STRING  | YES      |  Either the token (e.g. PHP, BTC, ETH) or the Balance ID (e.g. 1447779051242545455) to be transferred.
+receiving_account | STRING  | YES      |  Either the token (e.g. USD, BTC, ETH) or the Balance ID (e.g. 1447779051242545455) to be transferred.
 amount          | DECIMAL  | YES      |  The requested amount to be transferred to the requestor's receiving_account.
 message          | LONG  | YES      | An arbitrary message that will be attached to the payment request.
 supported_payment_collectors          |   STRING    | NO       | Methods of payment that are available to a user when they view a payment request (e.g., ["coins_peso_wallet"])
@@ -2251,7 +2251,7 @@ timestamp          | LONG   | YES        |
         "id": "1433341829953096704",
         "invoice": "1433341829953096704",
         "amount": "20",
-        "currency": "PHP",
+        "currency": "USD",
         "status": "pending",
         "created_at": 1685603661217,
         "updated_at": 1685603661217,
@@ -2293,7 +2293,7 @@ timestamp          | LONG   | YES        |
         "id": "1433341829953096704",
         "invoice": "1433341829953096704",
         "amount": "20",
-        "currency": "PHP",
+        "currency": "USD",
         "status": "pending",
         "created_at": 1685603661217,
         "updated_at": 1685603661217,
@@ -2331,7 +2331,7 @@ timestamp          | LONG   | YES        |
         "id": "1433341829953096704",
         "invoice": "1433341829953096704",
         "amount": "20",
-        "currency": "PHP",
+        "currency": "USD",
         "status": "pending",
         "created_at": 1685603661217,
         "updated_at": 1685603661217,
@@ -2508,7 +2508,7 @@ coins_peso_wallet|Pay with the user's Peso Coins wallet.
 ```javascript
 {
     "amount": 100,
-    "currency": "PHP",
+    "currency": "USD",
     "supported_payment_collectors": "["coins_peso_wallet"]",
     "external_transaction_id": "1",
     "expires_at": "1w"
@@ -2636,7 +2636,7 @@ Event payloads follow this convention:
     "name": "invoice.name",
     "data": {
         "id": "invoice_id",
-        "currency": "PHP",
+        "currency": "USD",
         "amount": "100",
         "amount_received": "0",
         "external_transaction_id": "1"
@@ -2680,7 +2680,7 @@ This continuously updated endpoint returns a list of all available trading pairs
   "error":"OK",
   "data":[
      {
-      "sourceCurrency":"PHP",
+      "sourceCurrency":"USD",
       "targetCurrency":"BTC",
       "minSourceAmount":"1000",
       "maxSourceAmount":"15000",
@@ -2688,13 +2688,13 @@ This continuously updated endpoint returns a list of all available trading pairs
     },
     {
       "sourceCurrency":"BTC",
-      "targetCurrency":"PHP",
+      "targetCurrency":"USD",
       "minSourceAmount":"0.0001",
       "maxSourceAmount":"0.1",
       "precision":"8"
     },
     {
-      "sourceCurrency":"PHP",
+      "sourceCurrency":"USD",
       "targetCurrency":"ETH",
       "minSourceAmount":"1000",
       "maxSourceAmount":"18000",
@@ -2702,7 +2702,7 @@ This continuously updated endpoint returns a list of all available trading pairs
     },
     {
       "sourceCurrency":"ETH",
-      "targetCurrency":"PHP",
+      "targetCurrency":"USD",
       "minSourceAmount":"0.003",
       "maxSourceAmount":"4.2",
       "precision":"8"
@@ -2741,10 +2741,10 @@ targetAmount | STRING | NO        |The amount of targetCurrency. You only need t
   "data": {
             "quoteId": "2182b4fc18ff4556a18332245dba75ea",
             "sourceCurrency": "BTC",
-            "targetCurrency": "PHP",
+            "targetCurrency": "USD",
             "sourceAmount": "0.1",
-            "price": "59999",             //1BTC=59999PHP
-            "targetAmount": "5999",       //The amount of PHP the user holds
+            "price": "59999",             //1BTC=59999USD
+            "targetAmount": "5999",       //The amount of USD the user holds
             "expiry": "10"
   }
 }
@@ -2816,7 +2816,7 @@ size | int    | No |
       "userId":"",
       "sourceCurrency": "BTC",
       "sourceCurrencyIcon":"",
-      "targetCurrency": "PHP",
+      "targetCurrency": "USD",
       "targetCurrencyIcon":"",
       "sourceAmount": "0.11",
       "targetAmount": "4466.89275956",
@@ -2878,7 +2878,7 @@ This endpoint is used to transfer funds between two accounts.
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 client_transfer_id | STRING | NO | Client Transfer ID
-account      | STRING | YES    | Either the token (e.g. PHP, BTC, ETH) or the Balance ID (e.g. 1447779051242545455) to be transferred.
+account      | STRING | YES    | Either the token (e.g. USD, BTC, ETH) or the Balance ID (e.g. 1447779051242545455) to be transferred.
 target_address   | STRING | YES    | The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
 amount      | BigDecimal | YES    | The amount being transferred
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
