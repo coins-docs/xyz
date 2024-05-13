@@ -2355,11 +2355,13 @@ id      | STRING | NO    | ID of the transfer record
 client_transfer_id| STRING | NO | Client Transfer ID, Maximum length 100
 page    | INT | NO | Current page, default is `1`
 per_page    | INT | NO | Quantity per page, default 2000, maximum `2000`
+type  | INT | NO | 1:Transfer in,2:Transfer out, Default:2
+from_address |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
 recvWindow | LONG  | YES    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
 
 If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
-
+Only when type=1, from_address will take effect.
 
 **Response:**
 ```json
