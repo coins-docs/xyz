@@ -2355,13 +2355,14 @@ id      | STRING | NO    | ID of the transfer record
 client_transfer_id| STRING | NO | Client Transfer ID, Maximum length 100
 page    | INT | NO | Current page, default is `1`
 per_page    | INT | NO | Quantity per page, default 2000, maximum `2000`
-type  | INT | NO | 1:Transfer in,2:Transfer out, Default:2
-from_address |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
+from_address |STRING|NO| The phone number or email for sender account (e.g. +63 9686490252 or testsub@gmail.com)
+to_address  |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
 recvWindow | LONG  | YES    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
 
-If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
-Only when type=1, from_address will take effect.
+- If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
+- If the client_transfer_id or id parameter is passed, then the client_transfer_id or id takes precedence.
+- The from_address and to_address parameters cannot be passed simultaneously.
 
 **Response:**
 ```json
@@ -2374,8 +2375,10 @@ Only when type=1, from_address will take effect.
       "amount": "1",
       "fee_amount": "0",
       "currency": "PBTC",
-      "target_address": "testsub@gmail.com",
+      "sourceAddress": "test1@gmail.com",
+      "target_address": "test2@gmail.com",
       "payment": "23094j0amd0fmag9agjgasd",
+      "type": 2,//2:transfer out,1:transfer in
       "status": "success",
       "message": "example",
       "created_at": "2019-07-04T03:28:50.531599Z"
