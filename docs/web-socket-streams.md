@@ -7,7 +7,7 @@ layout: default
 
 
 
-# Web Socket Streams for coins (2022-08-15)
+# Web Socket Streams for coins (2024-05-17)
 # General WSS information
 * The base endpoint is: **wsapi.coins.xyz**
 * Streams can be accessed either in a single raw stream or in a combined stream
