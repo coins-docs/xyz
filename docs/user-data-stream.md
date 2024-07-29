@@ -6,6 +6,9 @@ layout: default
 ---
 
 
+# Change Log
+2024-07-29: add `Business Type` to Balance Update endpoint
+
 
 # User Data Streams for Coins (2024-05-17)
 
@@ -126,7 +129,8 @@ contains balance changed
   "E": 1573200697110,           //Event Time
   "a": "ABC",                   //Asset
   "d": "100.00000000",          //Balance Delta
-  "T": 1573200697068            //Clear Time
+  "T": 1573200697068,           //Clear Time
+  "bs": "CHAIN_DEPOSIT"         //Business Type (CHAIN_DEPOSIT, FIAT_DEPOSIT, FIAT_WITHDRAWAL, CHAIN_WITHDRAWAL, OTHERS)
 }
 ```
 
