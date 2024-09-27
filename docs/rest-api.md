@@ -1878,48 +1878,53 @@ timestamp | LONG | YES |
 
 ```javascript
 {
-  "canTrade": true,       
-  "canWithdraw": true,    
-  "canDeposit": true,     
-  "updateTime": 123456789,
-  "accountType": "SPOT",
-  "balances": [
-    {
-      "asset": "BTC",
-      "free": "4723846.89208129",
-      "locked": "0.00000000"
-    },
-    {
-      "asset": "LTC",
-      "free": "4763368.68006011",
-      "locked": "0.00000000"
-    }
-  ],
-  "token": "USD",
-   "daily": {
-      "cashInLimit": "10000",
-      "cashInRemaining": "10000",
-      "cashOutLimit": "0",
-      "cashOutRemaining": "0",
-      "totalWithdrawLimit": "0",
-      "totalWithdrawRemaining": "0"
+   "accountType":"SPOT",
+   "canDeposit":true,
+   "canTrade":true,
+   "canWithdraw":true,
+   "balances":[
+      {
+         "asset":"BTC",
+         "free":"0",
+         "locked":"0"
+      },
+      {
+         "asset":"ETH",
+         "free":"0.000731",
+         "locked":"0"
+      },
+      {
+         "asset":"USDT",
+         "free":"0.4918",
+         "locked":"0"
+      }
+   ],
+   "token":"USD",
+   "daily":{
+      "cashInLimit":"100000",
+      "cashInRemaining":"100000",
+      "cashOutLimit":"100000",
+      "cashOutRemaining":"100000",
+      "totalWithdrawLimit":"100000",
+      "totalWithdrawRemaining":"100000"
    },
-   "monthly": {
-      "cashInLimit": "10000",
-      "cashInRemaining": "10000",
-      "cashOutLimit": "0",
-      "cashOutRemaining": "0",
-      "totalWithdrawLimit": "0",
-      "totalWithdrawRemaining": "0"
+   "monthly":{
+      "cashInLimit":"3000000",
+      "cashInRemaining":"3000000",
+      "cashOutLimit":"3000000",
+      "cashOutRemaining":"3000000",
+      "totalWithdrawLimit":"3000000",
+      "totalWithdrawRemaining":"3000000"
    },
-   "annually": {
-      "cashInLimit": "10000",
-      "cashInRemaining": "10000",
-      "cashOutLimit": "0",
-      "cashOutRemaining": "0",
-      "totalWithdrawLimit": "0",
-      "totalWithdrawRemaining": "0"
-   }
+   "annually":{
+      "cashInLimit":"36500000",
+      "cashInRemaining":"36500000",
+      "cashOutLimit":"36500000",
+      "cashOutRemaining":"36500000",
+      "totalWithdrawLimit":"36500000",
+      "totalWithdrawRemaining":"36499970.98"
+   },
+   "updateTime":1715308392448
 }
 ```
 
