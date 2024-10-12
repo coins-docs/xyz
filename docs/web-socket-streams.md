@@ -330,7 +330,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 ```javascript
 {
   "u":400900217,     // order book updateId
-  "s":"BTCUSDT",     // symbol
+  "s":"BNBUSDT",     // symbol
   "b":"25.35190000", // best bid price
   "B":"31.21000000", // best bid qty
   "a":"25.36520000", // best ask price
