@@ -9,7 +9,7 @@ layout: default
 
 # Web Socket Streams for coins (2024-05-17)
 # General WSS information
-* The base endpoint is: **wsapi.coins.xyz**
+* The base endpoint is: **wss://wsapi.coins.xyz**
 * Streams can be accessed either in a single raw stream or in a combined stream
 * Raw streams are accessed at **/openapi/quote/ws/v3/\<streamName\>**
 * Combined streams are accessed at **/openapi/quote/stream?streams=\<streamName1\>/\<streamName2\>/\<streamName3\>**
@@ -412,9 +412,9 @@ Order book price and quantity depth updates used to locally manage an order book
 ```
 
 ## How to manage a local order book correctly
-1. Open a stream to **wsapi.coins.xyz/openapi/quote/ws/stream?streams=ethbusd@depth**.
+1. Open a stream to **wss://wsapi.coins.xyz/openapi/quote/stream?streams=btcusdt@depth**.
 2. Buffer the events you receive from the stream.
-3. Get a depth snapshot from **https://api.coins.xyz/openapi/quote/v1/depth?symbol=ETHBUSD** .
+3. Get a depth snapshot from **https://api.coins.xyz/openapi/quote/v1/depth?symbol=BTCUSDT** .
 4. Drop any event where `u` is <= `lastUpdateId` in the snapshot.
 5. The first processed event should have `U` <= `lastUpdateId`+1 **AND** `u` >= `lastUpdateId`+1.
 6. While listening to the stream, each new event's `U` should be equal to the previous event's `u`+1.
