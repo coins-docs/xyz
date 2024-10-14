@@ -1030,6 +1030,79 @@ message     | STRING  | NO    | The message sent to the recipient account
 
 
 
+### Account information (USER_DATA)
+
+```shell
+GET /openapi/v1/account (HMAC SHA256)
+```
+
+GET current account information.
+
+**Weight:** 10
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+recvWindow | LONG | NO |The value cannot be greater than `60000`
+timestamp | LONG | YES |
+
+**Response:**
+
+```javascript
+{
+   "accountType":"SPOT",
+   "canDeposit":true,
+   "canTrade":true,
+   "canWithdraw":true,
+   "balances":[
+      {
+         "asset":"BTC",
+         "free":"0",
+         "locked":"0"
+      },
+      {
+         "asset":"ETH",
+         "free":"0.000731",
+         "locked":"0"
+      },
+      {
+         "asset":"USDT",
+         "free":"0.4918",
+         "locked":"0"
+      }
+   ],
+   "token":"USD",
+   "daily":{
+      "cashInLimit":"100000",
+      "cashInRemaining":"100000",
+      "cashOutLimit":"100000",
+      "cashOutRemaining":"100000",
+      "totalWithdrawLimit":"100000",
+      "totalWithdrawRemaining":"100000"
+   },
+   "monthly":{
+      "cashInLimit":"3000000",
+      "cashInRemaining":"3000000",
+      "cashOutLimit":"3000000",
+      "cashOutRemaining":"3000000",
+      "totalWithdrawLimit":"3000000",
+      "totalWithdrawRemaining":"3000000"
+   },
+   "annually":{
+      "cashInLimit":"36500000",
+      "cashInRemaining":"36500000",
+      "cashOutLimit":"36500000",
+      "cashOutRemaining":"36500000",
+      "totalWithdrawLimit":"36500000",
+      "totalWithdrawRemaining":"36499970.98"
+   },
+   "updateTime":1715308392448
+}
+```
+
+
+
 ### Market Data endpoints
 
 #### Order book
@@ -1166,31 +1239,7 @@ limit | INT | NO | Default 500; max 1000.
 ]
 ```
 
-#### Current average price
 
-```shell
-GET /openapi/quote/v1/avgPrice
-```
-
-Current average price for a symbol.
-
-**Weight:** 1
-
-**Parameters:**
-
-| Name   | Type   | Mandatory | Description                                           |
-| ------ | ------ | --------- | ----------------------------------------------------- |
-| symbol | STRING | YES       | symbol is not case sensitive, e.g. BTCUSDT or btcusdt |
-
-
-**Response:**
-
-```javascript
-{
-  "mins": 5,
-  "price": "9.35751834"
-}
-```
 
 #### 24hr ticker price change statistics
 
@@ -1389,6 +1438,34 @@ OR
   }
 ]
 ```
+
+
+#### Current average price
+
+```shell
+GET /openapi/quote/v1/avgPrice
+```
+
+Current average price for a symbol.
+
+**Weight:** 1
+
+**Parameters:**
+
+| Name   | Type   | Mandatory | Description                                           |
+| ------ | ------ | --------- | ----------------------------------------------------- |
+| symbol | STRING | YES       | symbol is not case sensitive, e.g. BTCUSDT or btcusdt |
+
+
+**Response:**
+
+```javascript
+{
+  "mins": 5,
+  "price": "9.35751834"
+}
+```
+
 
 
 #### Cryptoasset trading pairs
@@ -1894,79 +1971,6 @@ timestamp | LONG | YES       |
         "origQuoteOrderQty": "0"
     }
 ]
-```
-
-
-
-#### Account information (USER_DATA)
-
-```shell
-GET /openapi/v1/account (HMAC SHA256)
-```
-
-GET current account information.
-
-**Weight:** 10
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-recvWindow | LONG | NO |The value cannot be greater than `60000`
-timestamp | LONG | YES |
-
-**Response:**
-
-```javascript
-{
-   "accountType":"SPOT",
-   "canDeposit":true,
-   "canTrade":true,
-   "canWithdraw":true,
-   "balances":[
-      {
-         "asset":"BTC",
-         "free":"0",
-         "locked":"0"
-      },
-      {
-         "asset":"ETH",
-         "free":"0.000731",
-         "locked":"0"
-      },
-      {
-         "asset":"USDT",
-         "free":"0.4918",
-         "locked":"0"
-      }
-   ],
-   "token":"USD",
-   "daily":{
-      "cashInLimit":"100000",
-      "cashInRemaining":"100000",
-      "cashOutLimit":"100000",
-      "cashOutRemaining":"100000",
-      "totalWithdrawLimit":"100000",
-      "totalWithdrawRemaining":"100000"
-   },
-   "monthly":{
-      "cashInLimit":"3000000",
-      "cashInRemaining":"3000000",
-      "cashOutLimit":"3000000",
-      "cashOutRemaining":"3000000",
-      "totalWithdrawLimit":"3000000",
-      "totalWithdrawRemaining":"3000000"
-   },
-   "annually":{
-      "cashInLimit":"36500000",
-      "cashInRemaining":"36500000",
-      "cashOutLimit":"36500000",
-      "cashOutRemaining":"36500000",
-      "totalWithdrawLimit":"36500000",
-      "totalWithdrawRemaining":"36499970.98"
-   },
-   "updateTime":1715308392448
-}
 ```
 
 
