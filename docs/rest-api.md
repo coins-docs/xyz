@@ -333,263 +333,6 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-### Filters
-
-Filters define trading rules on a symbol or an exchange. Filters come in two forms: `symbol filters` and `exchange filters`.
-
-
-
-#### Symbol filters
-
-##### PRICE_FILTER
-
-The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
-
-* `minPrice` defines the minimum `price`/`stopPrice` allowed.
-* `maxPrice` defines the maximum `price`/`stopPrice` allowed.
-* `tickSize` defines the intervals that a `price`/`stopPrice` can be increased/decreased by.
-
-In order to pass the `price filter`, the following must be true for `price`/`stopPrice`:
-
-* `price` >= `minPrice`
-* `price` <= `maxPrice`
-* (`price`-`minPrice`) % `tickSize` == 0
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PRICE_FILTER",
-    "minPrice": "0.00000100",
-    "maxPrice": "100000.00000000",
-    "tickSize": "0.00000100"
-  }
-```
-
-
-
-##### PERCENT_PRICE
-
-The `PERCENT_PRICE` filter defines valid range for a price based on the weighted average of the previous trades. `avgPriceMins` is the number of minutes the weighted average price is calculated over.
-
-In order to pass the `percent price`, the following must be true for `price`:
-
-- `price` <= `weightedAveragePrice` * `multiplierUp`
-- `price` >= `weightedAveragePrice` * `multiplierDown`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PERCENT_PRICE",
-    "multiplierUp": "1.3000",
-    "multiplierDown": "0.7000",
-    "avgPriceMins": 5
-  }
-```
-
-
-
-##### PERCENT_PRICE_SA
-
-The `PERCENT_PRICE_SA` filter defines valid range for a price based on the  simple average of the previous trades. `avgPriceMins` is the number of minutes the simple average price is calculated over.
-
-In order to pass the `percent_price_sa`, the following must be true for `price`:
-
-- `price` <= `simpleAveragePrice` * `multiplierUp`
-- `price` >= `simpleAveragePrice` * `multiplierDown`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PERCENT_PRICE_SA",
-    "multiplierUp": "1.3000",
-    "multiplierDown": "0.7000",
-    "avgPriceMins": 5
-  }
-```
-
-
-
-##### PERCENT_PRICE_BY_SIDE
-
-The `PERCENT_PRICE_BY_SIDE` filter defines the valid range for the price based on the last price of the symbol.
-There is a different range depending on whether the order is placed on the `BUY` side or the `SELL` side.
-
-Buy orders will succeed on this filter if:
-
-- `Order price` <= `bidMultiplierUp` * `lastPrice`
-- `Order price` >= `bidMultiplierDown` * `lastPrice`
-
-Sell orders will succeed on this filter if:
-
-- `Order Price` <= `askMultiplierUp` * `lastPrice`
-- `Order Price` >= `askMultiplierDown` * `lastPrice`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PERCENT_PRICE_BY_SIDE",
-    "bidMultiplierUp": "1.2",
-    "bidMultiplierDown": "0.2",
-    "askMultiplierUp": "1.5",
-    "askMultiplierDown": "0.8",
-  }
-```
-
-
-
-##### PERCENT_PRICE_INDEX
-
-The `PERCENT_PRICE_INDEX` filter defines valid range for a price based on the  index price which is calculated based on  several exhanges in the market by centain rule. (indexPrice wobsocket pushing will be available in future)
-
-In order to pass the `percent_price_index`, the following must be true for `price`:
-
-- `price` <= `indexPrice` * `multiplierUp`
-- `price` >= `indexPrice` * `multiplierDown`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PERCENT_PRICE_INDEX",
-    "multiplierUp": "1.3000",
-    "multiplierDown": "0.7000",
-  }
-```
-
-
-
-##### PERCENT_PRICE_ORDER_SIZE
-
-The `PERCENT_PRICE_ORDER_SIZE` filter  is used to determine whether the execution of an order would cause the market price to fluctuate beyond the limit price, and if so, the order will be rejected.
-
-In order to pass the `percent_price_order_size`, the following must be true:
-
-- A buy order needs to meet: the market price after the order get filled  <`askPrice` * `multiplierUp`
-- A sell order needs to meet: the market price after the order get filled  >`bidPrice` * `multiplierDown`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "PERCENT_PRICE_ORDER_SIZE",
-    "multiplierUp": "1.3000",
-    "multiplierDown": "0.7000"
-  }
-```
-
-
-
-##### STATIC_PRICE_RANGE
-
-The `STATIC_PRICE_RANGE` filter defines a static valid range for the price.
-
-In order to pass the `static_price_range`, the following must be true for `price`:
-
-- `price` <= `priceUp`
-- `price` >= `priceDown`
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "STATIC_PRICE_RANGE",
-    "priceUp": "520",
-    "priceDown": "160"
-  }
-```
-
-
-
-##### LOT_SIZE
-
-The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
-
-* `minQty` defines the minimum `quantity` allowed.
-* `maxQty` defines the maximum `quantity` allowed.
-* `stepSize` defines the intervals that a `quantity`can be increased/decreased by.
-
-In order to pass the `lot size`, the following must be true for `quantity`:
-
-* `quantity` >= `minQty`
-* `quantity` <= `maxQty`
-* (`quantity`-`minQty`) % `stepSize` == 0
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "LOT_SIZE",
-    "minQty": "0.00100000",
-    "maxQty": "99999999.00000000",
-    "stepSize": "0.00100000"
-  }
-```
-
-
-
-##### NOTIONAL
-
-The `NOTIONAL` filter defines the acceptable notional range allowed for an order on a symbol.
-
-In order to pass this filter, the notional (`price * quantity`) has to pass the following conditions:
-
-- `price * quantity` <= `maxNotional`
-- `price * quantity` >= `minNotional`
-
-**/exchangeInfo format:**
-
-```javascript
-{
-   "filterType": "NOTIONAL",
-   "minNotional": "10.00000000",
-   "maxNotional": "10000.00000000"
-}
-```
-
-
-
-##### MAX_NUM_ORDERS
-
-The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
-Note that both triggered "algo" orders and normal orders are counted for this filter.
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "MAX_NUM_ORDERS",
-    "maxNumOrders": 200
-  }
-```
-
-
-
-##### MAX_NUM_ALGO_ORDERS
-
-The `MAX_ALGO_ORDERS` filter defines the maximum number of untriggered "algo" orders an account is allowed to have open on a symbol.
-"Algo" orders are `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-
-**/exchangeInfo format:**
-
-```javascript
-  {
-    "filterType": "MAX_NUM_ALGO_ORDERS",
-    "maxNumAlgoOrders": 5
-  }
-```
-
-
-
-#### Exchange Filters
-
-None for now
-
-
-
 ### General endpoints
 
 #### Test connectivity
@@ -1502,29 +1245,6 @@ None
 
 ### Spot Trading Endpoints
 
-#### Test new order (TRADE)
-
-```shell
-POST /openapi/v1/order/test (HMAC SHA256)
-```
-
-Test new order creation and signature/recvWindow long.
-Creates and validates a new order but does not send it into the matching engine.
-
-**Weight:** 1
-
-**Parameters:**
-
-Same as `POST /openapi/v1/order`
-
-**Response:**
-
-```javascript
-{}
-```
-
-
-
 #### New order  (TRADE)
 
 ```shell
@@ -1636,6 +1356,29 @@ Trigger order price rules against market price for both MARKET and LIMIT version
         }
     ]
 }
+```
+
+
+
+#### Test new order (TRADE)
+
+```shell
+POST /openapi/v1/order/test (HMAC SHA256)
+```
+
+Test new order creation and signature/recvWindow long.
+Creates and validates a new order but does not send it into the matching engine.
+
+**Weight:** 1
+
+**Parameters:**
+
+Same as `POST /openapi/v1/order`
+
+**Response:**
+
+```javascript
+{}
 ```
 
 
@@ -2140,268 +1883,263 @@ listenKey | STRING | YES |
 
 
 
-### Convert endpoints
+### Filters
 
-#### Get supported trading pairs
-```shell
-POST /openapi/convert/v1/get-supported-trading-pairs
-```
-
-This continuously updated endpoint returns a list of all available trading pairs. The response includes information on the minimum and maximum amounts that can be traded for the source currency, as well as the level of precision in decimal places used for the source currency.
-
-**Weight:** 1
-
-**Parameters:**
-
- N/A
+Filters define trading rules on a symbol or an exchange. Filters come in two forms: `symbol filters` and `exchange filters`.
 
 
 
-**Response:**
+#### Symbol filters
 
-```javascript
-{
-  "status":"Success",
-  "error":"OK",
-  "data":[
-     {
-      "sourceCurrency":"USD",
-      "targetCurrency":"BTC",
-      "minSourceAmount":"1000",
-      "maxSourceAmount":"15000",
-      "precision":"2"
-    },
-    {
-      "sourceCurrency":"BTC",
-      "targetCurrency":"USD",
-      "minSourceAmount":"0.0001",
-      "maxSourceAmount":"0.1",
-      "precision":"8"
-    },
-    {
-      "sourceCurrency":"USD",
-      "targetCurrency":"ETH",
-      "minSourceAmount":"1000",
-      "maxSourceAmount":"18000",
-      "precision":"2"
-    },
-    {
-      "sourceCurrency":"ETH",
-      "targetCurrency":"USD",
-      "minSourceAmount":"0.003",
-      "maxSourceAmount":"4.2",
-      "precision":"8"
-    }
-  ]
-}
-```
+##### PRICE_FILTER
 
+The `PRICE_FILTER` defines the `price` rules for a symbol. There are 3 parts:
 
+* `minPrice` defines the minimum `price`/`stopPrice` allowed.
+* `maxPrice` defines the maximum `price`/`stopPrice` allowed.
+* `tickSize` defines the intervals that a `price`/`stopPrice` can be increased/decreased by.
 
-#### Fetch a quote
+In order to pass the `price filter`, the following must be true for `price`/`stopPrice`:
 
-```shell
-POST /openapi/convert/v1/get-quote
-```
+* `price` >= `minPrice`
+* `price` <= `maxPrice`
+* (`price`-`minPrice`) % `tickSize` == 0
 
-This endpoint returns a quote for a specified source currency (sourceCurrency) and target currency (targetCurrency) pair.
-
-**Weight:** 1
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ |-----------| ------------
-sourceCurrency | STRING | YES       |The currency the user holds
-targetCurrency | STRING | YES       |The currency the user would like to obtain
-sourceAmount | STRING | NO        |The amount of sourceCurrency. You only need to fill in either the source amount or the target amount. If both are filled, it will result in an error.
-targetAmount | STRING | NO        |The amount of targetCurrency. You only need to fill in either the source amount or the target amount. If both are filled, it will result in an error.
-
-**Response:**
+**/exchangeInfo format:**
 
 ```javascript
-{
-  "status": 0, 
-  "error": "OK", 
-  "data": {
-            "quoteId": "2182b4fc18ff4556a18332245dba75ea",
-            "sourceCurrency": "BTC",
-            "targetCurrency": "USD",
-            "sourceAmount": "0.1",
-            "price": "59999",             //1BTC=59999USD
-            "targetAmount": "5999",       //The amount of USD the user holds
-            "expiry": "10"
+  {
+    "filterType": "PRICE_FILTER",
+    "minPrice": "0.00000100",
+    "maxPrice": "100000.00000000",
+    "tickSize": "0.00000100"
   }
-}
 ```
 
-#### Accept the quote
 
 
-```shell
-POST /openapi/convert/v1/accept-quote
-```
+##### PERCENT_PRICE
 
-Use this endpoint to accept the quote and receive the result instantly.
+The `PERCENT_PRICE` filter defines valid range for a price based on the weighted average of the previous trades. `avgPriceMins` is the number of minutes the weighted average price is calculated over.
 
-**Weight:** 1
+In order to pass the `percent price`, the following must be true for `price`:
 
-**Parameters:**
+- `price` <= `weightedAveragePrice` * `multiplierUp`
+- `price` >= `weightedAveragePrice` * `multiplierDown`
 
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-quoteId | STRING | YES |The ID assigned to the quote
-
-
-**Response:**
+**/exchangeInfo format:**
 
 ```javascript
-{
-  "status": 0, 
-  "data": {
-         "orderId" : "49d10b74c60a475298c6bbed08dd58fa",
-         "status": "SUCCESS"
-  },
-  "error": "ok"
-}
-```
-
-#### Retrieve order history
-
-
-```shell
-POST /openapi/convert/v1/query-order-history
-```
-This endpoint retrieves order history with the option to define a specific time period using start and end times.
-
-**Weight:** 1
-
-**Parameters:**
-
-Name | Type   | Mandatory | Description
------------- |--------|---------| ------------
-startTime | STRING | No | Numeric string representing milliseconds. The starting point of the required period. If no period is defined, the entire order history is returned.
-endTime | STRING | No |Numeric string representing milliseconds. The end point of the required period. If no period is defined, the entire order history is returned.
-status | STRING | No | deliveryStatus, If this field is available, use it with startTime. `TODO`, `SUCCESS`, `FAILED`, `PROCESSING`
-page | int    | No |
-size | int    | No |
-
-
-**Response:**
-
-```javascript
-{
-  "status": 0,
-   "error": "OK",
-   "data": [
-    {
-      "id":"",
-      "orderId": "25a9b92bcd4d4b2598c8be97bc65b466",
-      "quoteId": "1ecce9a7265a4a329cce80de46e2c583",
-      "userId":"",
-      "sourceCurrency": "BTC",
-      "sourceCurrencyIcon":"",
-      "targetCurrency": "USD",
-      "targetCurrencyIcon":"",
-      "sourceAmount": "0.11",
-      "targetAmount": "4466.89275956",
-      "price": "40608.115996",
-      "status": "SUCCESS",
-      "createdAt": "1671797993000",
-      "errorCode": "",
-      "errorMessage": "",
-      "inversePrice": "3306.115996"
-    }
-  ],
-  "total": 23
-}
-```
-
-#### Query balance (USER_DATA)
-
-```shell
-GET /openapi/account/v3/crypto-accounts
-```
-
-This endpoint allows users to retrieve their current account balance.
-
-**Weight:** 1
-**Parameters:**
-
-Name       | Type  | Mandatory | Description
------------------|--------|-----------|--------------------------------------------
-currency      | STRING | NO    | The currency for which the balance is being queried.
-recvWindow | LONG  | YES    | This value cannot be greater than `60000`
-timestamp     | LONG  | YES    | A point in time for which the balance is being queried.
-
-**Response:**
-```javascript
- {
-  "crypto-accounts": [
-    {
-      "id": "1451431230880900352",
-      "name": "name",
-      "currency": "PBTC",
-      "balance": "100",
-      "pending_balance": "200"
-    }
-  ]
-}
-```
-
-#### Query transfers (USER_DATA)
-
-```shell
-GET /openapi/transfer/v3/transfers/{id}
-```
-If an ID is provided, this endpoint retrieves an existing transfer record; otherwise, it returns a paginated list of transfers.
-
-**Weight:** 10
-
-**Parameters:**
-
-Name       | Type  | Mandatory | Description
------------------|--------|-----------|--------------------------------------------------------------------------------------
-id      | STRING | NO    | ID of the transfer record
-client_transfer_id| STRING | NO | Client Transfer ID, Maximum length 100
-page    | INT | NO | Current page, default is `1`
-per_page    | INT | NO | Quantity per page, default 2000, maximum `2000`
-from_address |STRING|NO| The phone number or email for sender account (e.g. +63 9686490252 or testsub@gmail.com)
-to_address  |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
-recvWindow | LONG  | YES    | This value cannot be greater than `60000`
-timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
-
-- If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
-- If the client_transfer_id or id parameter is passed, then the client_transfer_id or id takes precedence.
-- The from_address and to_address parameters cannot be passed simultaneously.
-
-**Response:**
-```json
- {
-  "transfers": [
-    {
-      "id": "2309rjw0amf0sq9me0gmadsmfoa",
-      "client_transfer_id": "1487573639841995270",
-      "account": "90dfg03goamdf02fs",
-      "amount": "1",
-      "fee_amount": "0",
-      "currency": "PBTC",
-      "sourceAddress": "test1@gmail.com",
-      "target_address": "test2@gmail.com",
-      "payment": "23094j0amd0fmag9agjgasd",
-      "type": 2,//2:transfer out,1:transfer in
-      "status": "success",
-      "message": "example",
-      "created_at": "2019-07-04T03:28:50.531599Z"
-    }
-  ],
-  "meta": {
-    "total_count": 0,
-    "next_page": 2,
-    "previous_page": 0
+  {
+    "filterType": "PERCENT_PRICE",
+    "multiplierUp": "1.3000",
+    "multiplierDown": "0.7000",
+    "avgPriceMins": 5
   }
+```
+
+
+
+##### PERCENT_PRICE_SA
+
+The `PERCENT_PRICE_SA` filter defines valid range for a price based on the  simple average of the previous trades. `avgPriceMins` is the number of minutes the simple average price is calculated over.
+
+In order to pass the `percent_price_sa`, the following must be true for `price`:
+
+- `price` <= `simpleAveragePrice` * `multiplierUp`
+- `price` >= `simpleAveragePrice` * `multiplierDown`
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "PERCENT_PRICE_SA",
+    "multiplierUp": "1.3000",
+    "multiplierDown": "0.7000",
+    "avgPriceMins": 5
+  }
+```
+
+
+
+##### PERCENT_PRICE_BY_SIDE
+
+The `PERCENT_PRICE_BY_SIDE` filter defines the valid range for the price based on the last price of the symbol.
+There is a different range depending on whether the order is placed on the `BUY` side or the `SELL` side.
+
+Buy orders will succeed on this filter if:
+
+- `Order price` <= `bidMultiplierUp` * `lastPrice`
+- `Order price` >= `bidMultiplierDown` * `lastPrice`
+
+Sell orders will succeed on this filter if:
+
+- `Order Price` <= `askMultiplierUp` * `lastPrice`
+- `Order Price` >= `askMultiplierDown` * `lastPrice`
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "PERCENT_PRICE_BY_SIDE",
+    "bidMultiplierUp": "1.2",
+    "bidMultiplierDown": "0.2",
+    "askMultiplierUp": "1.5",
+    "askMultiplierDown": "0.8",
+  }
+```
+
+
+
+##### PERCENT_PRICE_INDEX
+
+The `PERCENT_PRICE_INDEX` filter defines valid range for a price based on the  index price which is calculated based on  several exhanges in the market by centain rule. (indexPrice wobsocket pushing will be available in future)
+
+In order to pass the `percent_price_index`, the following must be true for `price`:
+
+- `price` <= `indexPrice` * `multiplierUp`
+- `price` >= `indexPrice` * `multiplierDown`
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "PERCENT_PRICE_INDEX",
+    "multiplierUp": "1.3000",
+    "multiplierDown": "0.7000",
+  }
+```
+
+
+
+##### PERCENT_PRICE_ORDER_SIZE
+
+The `PERCENT_PRICE_ORDER_SIZE` filter  is used to determine whether the execution of an order would cause the market price to fluctuate beyond the limit price, and if so, the order will be rejected.
+
+In order to pass the `percent_price_order_size`, the following must be true:
+
+- A buy order needs to meet: the market price after the order get filled  <`askPrice` * `multiplierUp`
+- A sell order needs to meet: the market price after the order get filled  >`bidPrice` * `multiplierDown`
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "PERCENT_PRICE_ORDER_SIZE",
+    "multiplierUp": "1.3000",
+    "multiplierDown": "0.7000"
+  }
+```
+
+
+
+##### STATIC_PRICE_RANGE
+
+The `STATIC_PRICE_RANGE` filter defines a static valid range for the price.
+
+In order to pass the `static_price_range`, the following must be true for `price`:
+
+- `price` <= `priceUp`
+- `price` >= `priceDown`
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "STATIC_PRICE_RANGE",
+    "priceUp": "520",
+    "priceDown": "160"
+  }
+```
+
+
+
+##### LOT_SIZE
+
+The `LOT_SIZE` filter defines the `quantity` (aka "lots" in auction terms) rules for a symbol. There are 3 parts:
+
+* `minQty` defines the minimum `quantity` allowed.
+* `maxQty` defines the maximum `quantity` allowed.
+* `stepSize` defines the intervals that a `quantity`can be increased/decreased by.
+
+In order to pass the `lot size`, the following must be true for `quantity`:
+
+* `quantity` >= `minQty`
+* `quantity` <= `maxQty`
+* (`quantity`-`minQty`) % `stepSize` == 0
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "LOT_SIZE",
+    "minQty": "0.00100000",
+    "maxQty": "99999999.00000000",
+    "stepSize": "0.00100000"
+  }
+```
+
+
+
+##### NOTIONAL
+
+The `NOTIONAL` filter defines the acceptable notional range allowed for an order on a symbol.
+
+In order to pass this filter, the notional (`price * quantity`) has to pass the following conditions:
+
+- `price * quantity` <= `maxNotional`
+- `price * quantity` >= `minNotional`
+
+**/exchangeInfo format:**
+
+```javascript
+{
+   "filterType": "NOTIONAL",
+   "minNotional": "10.00000000",
+   "maxNotional": "10000.00000000"
 }
 ```
+
+
+
+##### MAX_NUM_ORDERS
+
+The `MAX_NUM_ORDERS` filter defines the maximum number of orders an account is allowed to have open on a symbol.
+Note that both triggered "algo" orders and normal orders are counted for this filter.
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "MAX_NUM_ORDERS",
+    "maxNumOrders": 200
+  }
+```
+
+
+
+##### MAX_NUM_ALGO_ORDERS
+
+The `MAX_ALGO_ORDERS` filter defines the maximum number of untriggered "algo" orders an account is allowed to have open on a symbol.
+"Algo" orders are `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+
+**/exchangeInfo format:**
+
+```javascript
+  {
+    "filterType": "MAX_NUM_ALGO_ORDERS",
+    "maxNumAlgoOrders": 5
+  }
+```
+
+
+
+#### Exchange Filters
+
+None for now
+
+
+
 ## Sub-account endpoints
 
 ### Query Sub-account List (For Master Account)
@@ -2687,7 +2425,7 @@ GET /openapi/v1/sub-account/apikey/ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES        | 
-email      | STRING | YES        | 	<a href="#request-parameters">Sub-account email</a>
+email      | STRING | YES        |  <a href="#request-parameters">Sub-account email</a>
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2718,9 +2456,9 @@ POST /openapi/v1/sub-account/apikey/add-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       | 	<a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | NO        | 	Can be added in batches, separated by commas
-ipRestriction      | STRING | YES       | 	IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
+email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
+ipAddress      | STRING | NO        |   Can be added in batches, separated by commas
+ipRestriction      | STRING | YES       |   IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2751,8 +2489,8 @@ POST /openapi/v1/sub-account/apikey/delete-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       | 	<a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | YES       | 	Can be added in batches, separated by commas
+email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
+ipAddress      | STRING | YES       |   Can be added in batches, separated by commas
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2767,6 +2505,271 @@ timestamp     | LONG   | YES       | A point in time for which transfers are bei
   "ipRestrict": true,
   "role": "2,3,4,5,6",//0:READ_ONLY, 2:TRADE_ONLY, 3:CONVERT_ONLY, 4:CRYPTO_WALLET_ONLY, 5:FIAT_ONLY, 6:ACCOUNT_ONLY
   "updateTime": 1689744700710
+}
+```
+
+
+
+### Convert endpoints
+
+#### Get supported trading pairs
+```shell
+POST /openapi/convert/v1/get-supported-trading-pairs
+```
+
+This continuously updated endpoint returns a list of all available trading pairs. The response includes information on the minimum and maximum amounts that can be traded for the source currency, as well as the level of precision in decimal places used for the source currency.
+
+**Weight:** 1
+
+**Parameters:**
+
+ N/A
+
+
+
+**Response:**
+
+```javascript
+{
+  "status":"Success",
+  "error":"OK",
+  "data":[
+     {
+      "sourceCurrency":"USD",
+      "targetCurrency":"BTC",
+      "minSourceAmount":"1000",
+      "maxSourceAmount":"15000",
+      "precision":"2"
+    },
+    {
+      "sourceCurrency":"BTC",
+      "targetCurrency":"USD",
+      "minSourceAmount":"0.0001",
+      "maxSourceAmount":"0.1",
+      "precision":"8"
+    },
+    {
+      "sourceCurrency":"USD",
+      "targetCurrency":"ETH",
+      "minSourceAmount":"1000",
+      "maxSourceAmount":"18000",
+      "precision":"2"
+    },
+    {
+      "sourceCurrency":"ETH",
+      "targetCurrency":"USD",
+      "minSourceAmount":"0.003",
+      "maxSourceAmount":"4.2",
+      "precision":"8"
+    }
+  ]
+}
+```
+
+
+
+#### Fetch a quote
+
+```shell
+POST /openapi/convert/v1/get-quote
+```
+
+This endpoint returns a quote for a specified source currency (sourceCurrency) and target currency (targetCurrency) pair.
+
+**Weight:** 1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ |-----------| ------------
+sourceCurrency | STRING | YES       |The currency the user holds
+targetCurrency | STRING | YES       |The currency the user would like to obtain
+sourceAmount | STRING | NO        |The amount of sourceCurrency. You only need to fill in either the source amount or the target amount. If both are filled, it will result in an error.
+targetAmount | STRING | NO        |The amount of targetCurrency. You only need to fill in either the source amount or the target amount. If both are filled, it will result in an error.
+
+**Response:**
+
+```javascript
+{
+  "status": 0, 
+  "error": "OK", 
+  "data": {
+            "quoteId": "2182b4fc18ff4556a18332245dba75ea",
+            "sourceCurrency": "BTC",
+            "targetCurrency": "USD",
+            "sourceAmount": "0.1",
+            "price": "59999",             //1BTC=59999USD
+            "targetAmount": "5999",       //The amount of USD the user holds
+            "expiry": "10"
+  }
+}
+```
+
+#### Accept the quote
+
+
+```shell
+POST /openapi/convert/v1/accept-quote
+```
+
+Use this endpoint to accept the quote and receive the result instantly.
+
+**Weight:** 1
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+quoteId | STRING | YES |The ID assigned to the quote
+
+
+**Response:**
+
+```javascript
+{
+  "status": 0, 
+  "data": {
+         "orderId" : "49d10b74c60a475298c6bbed08dd58fa",
+         "status": "SUCCESS"
+  },
+  "error": "ok"
+}
+```
+
+#### Retrieve order history
+
+
+```shell
+POST /openapi/convert/v1/query-order-history
+```
+This endpoint retrieves order history with the option to define a specific time period using start and end times.
+
+**Weight:** 1
+
+**Parameters:**
+
+Name | Type   | Mandatory | Description
+------------ |--------|---------| ------------
+startTime | STRING | No | Numeric string representing milliseconds. The starting point of the required period. If no period is defined, the entire order history is returned.
+endTime | STRING | No |Numeric string representing milliseconds. The end point of the required period. If no period is defined, the entire order history is returned.
+status | STRING | No | deliveryStatus, If this field is available, use it with startTime. `TODO`, `SUCCESS`, `FAILED`, `PROCESSING`
+page | int    | No |
+size | int    | No |
+
+
+**Response:**
+
+```javascript
+{
+  "status": 0,
+   "error": "OK",
+   "data": [
+    {
+      "id":"",
+      "orderId": "25a9b92bcd4d4b2598c8be97bc65b466",
+      "quoteId": "1ecce9a7265a4a329cce80de46e2c583",
+      "userId":"",
+      "sourceCurrency": "BTC",
+      "sourceCurrencyIcon":"",
+      "targetCurrency": "USD",
+      "targetCurrencyIcon":"",
+      "sourceAmount": "0.11",
+      "targetAmount": "4466.89275956",
+      "price": "40608.115996",
+      "status": "SUCCESS",
+      "createdAt": "1671797993000",
+      "errorCode": "",
+      "errorMessage": "",
+      "inversePrice": "3306.115996"
+    }
+  ],
+  "total": 23
+}
+```
+
+#### Query balance (USER_DATA)
+
+```shell
+GET /openapi/account/v3/crypto-accounts
+```
+
+This endpoint allows users to retrieve their current account balance.
+
+**Weight:** 1
+**Parameters:**
+
+Name       | Type  | Mandatory | Description
+-----------------|--------|-----------|--------------------------------------------
+currency      | STRING | NO    | The currency for which the balance is being queried.
+recvWindow | LONG  | YES    | This value cannot be greater than `60000`
+timestamp     | LONG  | YES    | A point in time for which the balance is being queried.
+
+**Response:**
+```javascript
+ {
+  "crypto-accounts": [
+    {
+      "id": "1451431230880900352",
+      "name": "name",
+      "currency": "PBTC",
+      "balance": "100",
+      "pending_balance": "200"
+    }
+  ]
+}
+```
+
+#### Query transfers (USER_DATA)
+
+```shell
+GET /openapi/transfer/v3/transfers/{id}
+```
+If an ID is provided, this endpoint retrieves an existing transfer record; otherwise, it returns a paginated list of transfers.
+
+**Weight:** 10
+
+**Parameters:**
+
+Name       | Type  | Mandatory | Description
+-----------------|--------|-----------|--------------------------------------------------------------------------------------
+id      | STRING | NO    | ID of the transfer record
+client_transfer_id| STRING | NO | Client Transfer ID, Maximum length 100
+page    | INT | NO | Current page, default is `1`
+per_page    | INT | NO | Quantity per page, default 2000, maximum `2000`
+from_address |STRING|NO| The phone number or email for sender account (e.g. +63 9686490252 or testsub@gmail.com)
+to_address  |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
+recvWindow | LONG  | YES    | This value cannot be greater than `60000`
+timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
+
+- If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
+- If the client_transfer_id or id parameter is passed, then the client_transfer_id or id takes precedence.
+- The from_address and to_address parameters cannot be passed simultaneously.
+
+**Response:**
+```json
+ {
+  "transfers": [
+    {
+      "id": "2309rjw0amf0sq9me0gmadsmfoa",
+      "client_transfer_id": "1487573639841995270",
+      "account": "90dfg03goamdf02fs",
+      "amount": "1",
+      "fee_amount": "0",
+      "currency": "PBTC",
+      "sourceAddress": "test1@gmail.com",
+      "target_address": "test2@gmail.com",
+      "payment": "23094j0amd0fmag9agjgasd",
+      "type": 2,//2:transfer out,1:transfer in
+      "status": "success",
+      "message": "example",
+      "created_at": "2019-07-04T03:28:50.531599Z"
+    }
+  ],
+  "meta": {
+    "total_count": 0,
+    "next_page": 2,
+    "previous_page": 0
+  }
 }
 ```
 
