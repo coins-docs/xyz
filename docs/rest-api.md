@@ -1410,7 +1410,29 @@ Notes:
 
 * Either `orderId` or `origClientOrderId` must be sent. If both parameters are sent, `orderId` takes precedence. A list will be returned for orders with identical clientOrderId.
 
-**Response:**
+**Response Single Order:**
+
+```javascript
+{
+    'clientOrderId': 'test5678',
+    'cummulativeQuoteQty': '3946.87326',
+    'executedQty': '0.001',
+    'isWorking': False,
+    'orderId': 1799249051008066560,
+    'origQty': '0.001',
+    'origQuoteOrderQty': '3946.87326',
+    'price': '0',
+    'side': 'BUY',
+    'status': 'FILLED',
+    'stopPrice': '0',
+    'symbol': 'BTCPHP',
+    'time': 1729223201090,
+    'timeInForce': 'GTC',
+    'type': 'MARKET',
+    'updateTime': 1729223201201
+}
+```
+**Response Order List:**
 
 ```javascript
 [
