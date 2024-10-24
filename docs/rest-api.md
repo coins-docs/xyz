@@ -770,7 +770,8 @@ message     | STRING  | NO    | The message sent to the recipient account
       "exchange": "1",
       "payment": "23094j0amd0fmag9agjgasd",
       "client_transfer_id": "1487573639841995271",
-      "message": "example"
+      "message": "example",
+      "errorMessage":""//Error message returned when transfer fails, eg: Insufficient balance
      }
 }
 ```
