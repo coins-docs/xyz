@@ -126,6 +126,7 @@ MARKET_DATA | Endpoint requires sending a valid API Key.
 * The `signature` is **not case sensitive**.
 * `totalParams` is defined as the `query string` concatenated with the
   `request body`.
+* We recommend to use query string for GET request, request body for POST request. But for spot trading apis, we recommend to use query string.
 
 
 
