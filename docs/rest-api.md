@@ -166,7 +166,7 @@ secretKey | lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76
 
 Parameter | Value
 ------------ | ------------
-symbol | ETHBTC
+symbol | BTCUSDT
 side | BUY
 type | LIMIT
 timeInForce | GTC
@@ -179,11 +179,11 @@ timestamp | 1538323200000
 
 #### Example 1: As a query string
 
-* **queryString:** symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
+* **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
 (stdin)= 5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6
 ```
 
@@ -191,18 +191,18 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 
 
 #### Example 2: As a request body
 
-* **requestBody:** symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
+* **requestBody:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
 (stdin)= 5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6
 ```
 
@@ -210,19 +210,19 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 
 
 #### Example 3: Mixed query string and request body
 
-* **queryString:** symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC
+* **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC
 * **requestBody:** quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
 (stdin)= 885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa
 ```
 
@@ -230,7 +230,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
 ```
 
 Note that in Example 3, the signature is different from the previous examples. Specifically, there is be no `&` character between `GTC` and `quantity=1`.
@@ -418,8 +418,8 @@ Current exchange trading rules and symbol information
 
 | Name    | Type   | Mandatory | Description                                                  |
 | ------- | ------ | --------- | ------------------------------------------------------------ |
-| symbol  | STRING | NO        | Specify a trading pair, for example symbol=ETHBTC            |
-| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"ETHBTC","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["ETHBTC","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
+| symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCUSDT            |
+| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"BTCUSDT","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCUSDT","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
 
 **Response:**
 
@@ -430,11 +430,11 @@ Current exchange trading rules and symbol information
   "exchangeFilters": [],
   "symbols": [
     {
-      "symbol": "ETHBTC",
+      "symbol": "BTCUSDT",
       "status": "TRADING",
-      "baseAsset": "ETH",
+      "baseAsset": "BTC",
       "baseAssetPrecision": 8,
-      "quoteAsset": "BTC",
+      "quoteAsset": "USDT",
       "quoteAssetPrecision": 8,
       "orderTypes": [
         "LIMIT",
@@ -1131,7 +1131,7 @@ OR
     "price": "4.00000200"
   },
   {
-    "symbol": "ETHBTC",
+    "symbol": "BTCUSDT",
     "price": "0.07946600"
   }
 ]
@@ -1188,7 +1188,7 @@ OR
     "askQty": "9.00000000"
   },
   {
-    "symbol": "ETHBTC",
+    "symbol": "BTCUSDT",
     "bidPrice": "0.07946700",
     "bidQty": "9.00000000",
     "askPrice": "100000.00000000",
