@@ -1474,7 +1474,7 @@ Same as `POST /openapi/v1/order`
 
 
 
-#### Query order (USER_DATA)
+### Query order (USER_DATA)
 
 ```shell
 GET /openapi/v1/order (HMAC SHA256)
@@ -2289,7 +2289,7 @@ GET /openapi/v1/sub-account/list
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-email      | STRING | NO    | <a href="#request-parameters">Sub-account email</a>
+email      | STRING | NO    | Sub account email
 page    | INT | NO | Current page, default value: 1
 limit    | INT | NO | Quantity per page, default value 10, maximum `200`
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
@@ -2329,7 +2329,7 @@ POST /openapi/v1/sub-account/create
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-accountName      | STRING | YES       | <a href="#request-parameters">Sub-account email</a>
+accountName      | STRING | YES       | Sub account email
 recvWindow | LONG  | NO        | This value cannot be greater than `60000`
 timestamp     | LONG  | YES       | A point in time for which transfers are being queried.
 
@@ -2358,7 +2358,7 @@ GET /openapi/v1/sub-account/asset
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-email      | STRING | YES       | <a href="#request-parameters">Sub-account email</a>
+email      | STRING | YES       | Sub account email
 recvWindow | LONG  | NO        | This value cannot be greater than `60000`
 timestamp     | LONG  | YES       | A point in time for which transfers are being queried.
 
@@ -2408,6 +2408,11 @@ timestamp     | LONG  | YES       | A point in time for which transfers are bein
 - Transfer from master account by default if fromEmail is not sent.
 - Transfer to master account by default if toEmail is not sent.
 - Specify at least one of fromEmail and toEmail.
+- Supported transfer scenarios:
+  - Master account transfer to sub-account 
+  - Sub-account transfer to master account 
+  - Sub-account transfer to Sub-account
+
 
 **Response:**
 ```json
@@ -2559,7 +2564,7 @@ GET /openapi/v1/sub-account/apikey/ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES        | 
-email      | STRING | YES        |  <a href="#request-parameters">Sub-account email</a>
+email      | STRING | YES        | 	Sub account email
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2590,9 +2595,9 @@ POST /openapi/v1/sub-account/apikey/add-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | NO        |   Can be added in batches, separated by commas
-ipRestriction      | STRING | YES       |   IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
+email      | STRING | YES       | 	Sub account email
+ipAddress      | STRING | NO        | 	Can be added in batches, separated by commas
+ipRestriction      | STRING | YES       | 	IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2623,8 +2628,8 @@ POST /openapi/v1/sub-account/apikey/delete-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | YES       |   Can be added in batches, separated by commas
+email      | STRING | YES       | 	Sub account email
+ipAddress      | STRING | YES       | 	Can be added in batches, separated by commas
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2641,6 +2646,7 @@ timestamp     | LONG   | YES       | A point in time for which transfers are bei
   "updateTime": 1689744700710
 }
 ```
+
 
 ###  Get Sub-account Deposit Address(For Master Account)
 
@@ -2735,8 +2741,6 @@ Fetch deposit history.
     }
 ]
 ```
-
-
 
 
 
