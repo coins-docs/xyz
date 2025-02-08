@@ -411,7 +411,6 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 * 1M
 
 
-
 ### General endpoints
 
 #### Test connectivity
