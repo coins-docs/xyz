@@ -491,8 +491,8 @@ Current exchange trading rules and symbol information
 
 | Name    | Type   | Mandatory | Description                                                  |
 | ------- | ------ | --------- | ------------------------------------------------------------ |
-| symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCUSDT            |
-| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"BTCUSDT","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCUSDT","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
+| symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCPHP            |
+| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"BTCPHP","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCPHP","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
 
 **Response:**
 
@@ -503,11 +503,11 @@ Current exchange trading rules and symbol information
   "exchangeFilters": [],
   "symbols": [
     {
-      "symbol": "BTCUSDT",
+      "symbol": "BTCPHP",
       "status": "TRADING",
       "baseAsset": "BTC",
       "baseAssetPrecision": 8,
-      "quoteAsset": "USDT",
+      "quoteAsset": "PHP",
       "quoteAssetPrecision": 8,
       "orderTypes": [
         "LIMIT",
@@ -824,12 +824,14 @@ This endpoint is used to transfer funds between two accounts.
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 client_transfer_id | STRING | NO | Client Transfer ID, cannot send duplicate ID
-account      | STRING | YES    | Either the token (e.g. USD, BTC, ETH) or the Balance ID (e.g. `1447779051242545455`) to be transferred.
+account      | STRING | YES    | Either the token (e.g. PHP, BTC, ETH) or the Balance ID (e.g. `1447779051242545455`) to be transferred.
 target_address   | STRING | YES    | The phone number or email for recipient account (e.g. `+63 9686490252` or `testsub@gmail.com`)
 amount      | BigDecimal | YES    | The amount being transferred
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time when the transfer is performed
 message     | STRING  | NO    | The message sent to the recipient account
+
+If the client_transfer_id or id parameter is passed in, the type parameter is invalid.
 
 **Request:**
 ```javascript
@@ -861,7 +863,7 @@ message     | STRING  | NO    | The message sent to the recipient account
 
 
 
-### Account information (USER_DATA)
+#### Account information (USER_DATA)
 
 ```shell
 GET /openapi/v1/account (HMAC SHA256)
@@ -888,47 +890,47 @@ timestamp | LONG | YES |
    "canWithdraw":true,
    "balances":[
       {
-         "asset":"BTC",
+         "asset":"456",
+         "free":"100",
+         "locked":"0"
+      },
+      {
+         "asset":"APE",
          "free":"0",
          "locked":"0"
       },
       {
-         "asset":"ETH",
-         "free":"0.000731",
-         "locked":"0"
-      },
-      {
-         "asset":"USDT",
-         "free":"0.4918",
+         "asset":"AXS",
+         "free":"0.00005",
          "locked":"0"
       }
    ],
-   "token":"USD",
+   "token":"PHP",
    "daily":{
-      "cashInLimit":"100000",
-      "cashInRemaining":"100000",
-      "cashOutLimit":"100000",
-      "cashOutRemaining":"100000",
-      "totalWithdrawLimit":"100000",
-      "totalWithdrawRemaining":"100000"
+      "cashInLimit":"500000",
+      "cashInRemaining":"499994",
+      "cashOutLimit":"500000",
+      "cashOutRemaining":"500000",
+      "totalWithdrawLimit":"500000",
+      "totalWithdrawRemaining":"500000"
    },
    "monthly":{
-      "cashInLimit":"3000000",
-      "cashInRemaining":"3000000",
-      "cashOutLimit":"3000000",
-      "cashOutRemaining":"3000000",
-      "totalWithdrawLimit":"3000000",
-      "totalWithdrawRemaining":"3000000"
+      "cashInLimit":"10000000",
+      "cashInRemaining":"9999157",
+      "cashOutLimit":"10000000",
+      "cashOutRemaining":"10000000",
+      "totalWithdrawLimit":"10000000",
+      "totalWithdrawRemaining":"10000000"
    },
    "annually":{
-      "cashInLimit":"36500000",
-      "cashInRemaining":"36500000",
-      "cashOutLimit":"36500000",
-      "cashOutRemaining":"36500000",
-      "totalWithdrawLimit":"36500000",
-      "totalWithdrawRemaining":"36499970.98"
+      "cashInLimit":"120000000",
+      "cashInRemaining":"119998577",
+      "cashOutLimit":"120000000",
+      "cashOutRemaining":"119999488",
+      "totalWithdrawLimit":"120000000",
+      "totalWithdrawRemaining":"119998487.97"
    },
-   "updateTime":1715308392448
+   "updateTime":1707273549694
 }
 ```
 
@@ -1204,7 +1206,7 @@ OR
     "price": "4.00000200"
   },
   {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCPHP",
     "price": "0.07946600"
   }
 ]
@@ -1261,7 +1263,7 @@ OR
     "askQty": "9.00000000"
   },
   {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCPHP",
     "bidPrice": "0.07946700",
     "bidQty": "9.00000000",
     "askPrice": "100000.00000000",
@@ -1269,6 +1271,7 @@ OR
   }
 ]
 ```
+
 
 
 #### Current average price
