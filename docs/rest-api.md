@@ -7,11 +7,7 @@ nav: sidebar/rest-api.html
 ---
 
 # Change log:
-2025-01-02: Added the `/openapi/fiat/v2/history` endpoint.
-
 2024-10-11: Added the `/openapi/v1/sub-account/wallet/deposit/address`,`/openapi/v1/sub-account/wallet/deposit/history` endpoint.
-
-2024-08-26: Added the `startTime` `endTime` parameter to the `openapi/fiat/v1/history` endpoint.
 
 2024-05-10: Added the `from_address` `to_address` parameter to the `/openapi/transfer/v3/transfers` endpoint.
 
@@ -25,17 +21,11 @@ nav: sidebar/rest-api.html
 
 2023-12-29: Added kyc remaining and limit to the `/openapi/v1/account` endpoint.
 
-2023-12-06: Added the `internalOrderId` generate rule description to the `/openapi/fiat/v1/cash-out` endpoint.
-
 2023-09-20: Added the `message` parameter to the `/openapi/transfer/v3/transfers` endpoint.
 
-2023-08-30: Added `/openapi/convert/v1/query-order-history`, and updated`openapi/fiat/v1/cash-out`, `openapi/fiat/v1/support-channel` docs.
+2023-08-17: Updated `/openapi/convert/v1/accept-quote`, `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.
 
-2023-08-17: Updated `/openapi/convert/v1/accept-quote`, `openapi/fiat/v1/history`, `openapi/fiat/v1/cash-out`, `openapi/fiat/v1/support-channel`, `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.
-
-2023-08-08: Updated `openapi/fiat/v1/history`, `openapi/fiat/v1/cash-out`, `openapi/fiat/v1/support-channel`, `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.  
-
-2023-07-31: Added `openapi/fiat/v1/history` endpoint to query fiat currency order history 
+2023-08-08: Updated `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.  
 
 2023-07-15: Updated `MARKET order type now supports quantity for buy and quoteOrderQty for sell` 
 
