@@ -7,9 +7,53 @@ nav: sidebar/rest-api.html
 ---
 
 # Change log:
-
 2024-10-11: Added the `/openapi/v1/sub-account/wallet/deposit/address`,`/openapi/v1/sub-account/wallet/deposit/history` endpoint.
 
+2024-05-10: Added the `from_address` `to_address` parameter to the `/openapi/transfer/v3/transfers` endpoint.
+
+2024-04-29: Added the `inversePrice` response parameter to the `/openapi/convert/query-order-history` endpoint.
+
+2024-04-24: Add <a href="#sub-account-endpoints">Sub-account</a> endpoints : `/openapi/v1/sub-account/list`,`/openapi/v1/sub-account/create`,`/openapi/v1/sub-account/asset`,`/openapi/v1/sub-account/transfer/universal-transfer`,`/openapi/v1/sub-account/transfer/sub-to-master`,`/openapi/v1/sub-account/transfer/universal-transfer-history`,`/openapi/v1/sub-account/transfer/sub-history`,`/openapi/v1/sub-account/apikey/ip-restriction`,`/openapi/v1/sub-account/apikey/add-ip-restriction`,`/openapi/v1/sub-account/apikey/delete-ip-restriction`
+
+2024-04-17: Added the `targetAmount` parameter to the `/openapi/convert/v1/get-quote` endpoint.
+
+2024-02-19: Added the `openapi/v1/user/ip` endpoint.
+
+2023-12-29: Added kyc remaining and limit to the `/openapi/v1/account` endpoint.
+
+2023-09-20: Added the `message` parameter to the `/openapi/transfer/v3/transfers` endpoint.
+
+2023-08-17: Updated `/openapi/convert/v1/accept-quote` docs.
+
+2023-07-15: Updated `MARKET order type now supports quantity for buy and quoteOrderQty for sell` 
+
+2023-07-15: Added  `stpFlag` in the request of New order (TRADE) endpoint for anti self-trading behaviour.
+
+2023-07-15: Added order status `EXPIRED`.
+
+2023-05-17: The disclaimer regarding the following endpoints being in the QA phase has been removed as the QA process has been successfully completed: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`.
+
+2023-05-08: Added the following endpoints: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`. The endpoints are still in QA and are appropriately marked as such.
+
+2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history`. 
+
+2023-04-10: Added the `transfer` interfaces.
+
+2022-09-12: Modified the `symbol` in the `Cancel All Open Orders on a Symbol` API request as required.
+
+2022-09-09: Changed the `orderId/transactTime/time/updateTime` response from string to number in order related interfaces.
+
+2022-08-24: Updated the `STOP_LOSS/TAKE_PROFIT` description in the `New order (TRADE)` API.
+
+2022-08-23: Fixed incorrect depth information.
+
+2022-08-19: Added weight information for all interfaces.
+
+2022-08-12: Changed `maxNumOrders` to 200 in `filter MAX_NUM_ORDERS`.
+
+2022-08-12: Changed `maxNumAlgoOrders` to 5 in `filter MAX_NUM_ALGO_ORDERS`.
+
+<!--more-->
 
 # Public Rest API for Coins (2024-05-17)
 
@@ -39,6 +83,20 @@ nav: sidebar/rest-api.html
 
 * Specific error codes and messages are defined in another document.
 
+## API Library
+
+### Connectors
+
+The following are lightweight libraries that work as connectors to the Coins public API, written in different languages:
+
+* Python <a href="https://github.com/coins-docs/coins-connector-python">https://github.com/coins-docs/coins-connector-python</a> 
+
+### Postman Collections
+
+
+Postman collections are available, and they are recommended for new users seeking a quick and easy start with the API.
+
+* Postman <a href="https://github.com/coins-docs/coins-api-postman">https://github.com/coins-docs/coins-api-postman</a> 
 
 
 ## General Information on Endpoints
@@ -105,13 +163,13 @@ nav: sidebar/rest-api.html
 * API keys can be configured to have access only to specific types of secure endpoints. For example, one API key may be restricted to TRADE routes only, while another API key can have access to all routes except TRADE.
 * By default, API keys have access to all secure routes.
 
-Security Type | Description
------------- | ------------
-NONE | Endpoint can be accessed freely.
-TRADE | Endpoint requires sending a valid API Key and signature.
-USER_DATA | Endpoint requires sending a valid API Key and signature.
-USER_STREAM | Endpoint requires sending a valid API Key.
-MARKET_DATA | Endpoint requires sending a valid API Key.
+Security Type | Additional parameter          | Description
+------------ |-------------------------------| ------------
+NONE | none                          | Endpoint can be accessed freely.
+TRADE| `X-COINS-APIKEY`、`signature`、`timestamp` | Endpoint requires sending a valid API Key and signature and timing security. 
+USER_DATA| `X-COINS-APIKEY`、`signature`、`timestamp`                         | Endpoint requires sending a valid API Key and signature and timing security.. 
+USER_STREAM | `X-COINS-APIKEY`                         | Endpoint requires sending a valid API Key.               
+MARKET_DATA | `X-COINS-APIKEY`                         | Endpoint requires sending a valid API Key.               
 
 * `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
@@ -120,19 +178,19 @@ MARKET_DATA | Endpoint requires sending a valid API Key.
 ### SIGNED (TRADE and USER_DATA) Endpoint Security
 
 * `SIGNED` endpoints require an additional parameter, `signature`, to be
-  sent in the  `query string` or `request body`.
+  sent in the  `query string` or `form request body` or `header`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation.
   Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
 * The `signature` is **not case sensitive**.
 * `totalParams` is defined as the `query string` concatenated with the
-  `request body`.
-* We recommend the use of `query string` for GET request and `request body` for POST request. However, for Spot Trading APIs, we recommend using `query string`.
+  `request body`(exclude `signature` parameters and values If signature parameters are in both).
+* We recommend the use of `query string` for GET request and `form request body` for POST request. However, for Spot Trading APIs, we recommend using `query string`.
 
 
 
 ### Timing Security
 
-* A `SIGNED` endpoint requires an additional parameter, `timestamp`, to be included in the request. The `timestamp` should be the millisecond timestamp indicating when the request was created and sent.
+* A `SIGNED` endpoint requires an additional parameter, `timestamp`, to be sent in the  `query string` or `form request body` or `header`(Not recommended). The `timestamp` should be in millisecond timestamp indicating when the request was created and sent.
 * An optional parameter, `recvWindow`, can be included to specify the validity duration of the request in milliseconds after the timestamp. If `recvWindow` is not provided, **it will default to 5000 milliseconds**.
 * The logic is as follows:
 
@@ -166,7 +224,7 @@ secretKey | lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76
 
 Parameter | Value
 ------------ | ------------
-symbol | BTCUSDT
+symbol | BTCPHP
 side | BUY
 type | LIMIT
 timeInForce | GTC
@@ -179,62 +237,61 @@ timestamp | 1538323200000
 
 #### Example 1: As a query string
 
-* **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
+* **queryString:** symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
-(stdin)= ea2ee13f5c286a6e8dc8e671bac41d361bb123d13695befb5b33fc5e043b032b
+[linux]$ echo -n "symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+(stdin)= d7b09aa959094bafd1de10be3985651691fff6cc04b5cd94aea8cc1ca02e0ed8
 ```
 
 * **curl command:**
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=ea2ee13f5c286a6e8dc8e671bac41d361bb123d13695befb5b33fc5e043b032b'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=d7b09aa959094bafd1de10be3985651691fff6cc04b5cd94aea8cc1ca02e0ed8'
 ```
 
 
 
 #### Example 2: As a request body
 
-* **requestBody:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
+* **requestBody:** symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
-(stdin)= ea2ee13f5c286a6e8dc8e671bac41d361bb123d13695befb5b33fc5e043b032b
+[linux]$ echo -n "symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+(stdin)= d7b09aa959094bafd1de10be3985651691fff6cc04b5cd94aea8cc1ca02e0ed8
 ```
 
 * **curl command:**
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=ea2ee13f5c286a6e8dc8e671bac41d361bb123d13695befb5b33fc5e043b032b'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order' -d 'symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=d7b09aa959094bafd1de10be3985651691fff6cc04b5cd94aea8cc1ca02e0ed8'
 ```
 
 
 
 #### Example 3: Mixed query string and request body
 
-* **queryString:** symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC
+* **queryString:** symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC
 * **requestBody:** quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000
 * **HMAC SHA256 signature:**
 
 ```shell
-[linux]$ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
-(stdin)= df924cd6b692b4f5630ac8949ca8442bde0f8aaff77aad3721ec97d014c89115
+[linux]$ echo -n "symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000" | openssl dgst -sha256 -hmac "lH3ELTNiFxCQTmi9pPcWWikhsjO04Yoqw3euoHUuOLC3GYBW64ZqzQsiOEHXQS76"
+(stdin)= 340037ed5366e650bd0e09e170db4a6ace0a9cba3e8af4e5c37ba2143fb84de0
 ```
 
 * **curl command:**
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCUSDT&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=df924cd6b692b4f5630ac8949ca8442bde0f8aaff77aad3721ec97d014c89115'
+[linux]$ curl -H "X-COINS-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=BTCPHP&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=340037ed5366e650bd0e09e170db4a6ace0a9cba3e8af4e5c37ba2143fb84de0'
 ```
 
 Note that in Example 3, the signature is different from the previous examples. Specifically, there is be no `&` character between `GTC` and `quantity=1`.
-
 
 
 ## Public API Endpoints
@@ -337,7 +394,6 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 * 1M
 
 
-
 ### General endpoints
 
 #### Test connectivity
@@ -418,8 +474,8 @@ Current exchange trading rules and symbol information
 
 | Name    | Type   | Mandatory | Description                                                  |
 | ------- | ------ | --------- | ------------------------------------------------------------ |
-| symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCUSDT            |
-| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"BTCUSDT","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCUSDT","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
+| symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCPHP            |
+| symbols | STRING | NO        | x-Specify multiple trading pairs, such as symbol=%5B"BTCPHP","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCPHP","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
 
 **Response:**
 
@@ -430,11 +486,11 @@ Current exchange trading rules and symbol information
   "exchangeFilters": [],
   "symbols": [
     {
-      "symbol": "BTCUSDT",
+      "symbol": "BTCPHP",
       "status": "TRADING",
       "baseAsset": "BTC",
       "baseAssetPrecision": 8,
-      "quoteAsset": "USDT",
+      "quoteAsset": "PHP",
       "quoteAssetPrecision": 8,
       "orderTypes": [
         "LIMIT",
@@ -751,12 +807,14 @@ This endpoint is used to transfer funds between two accounts.
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 client_transfer_id | STRING | NO | Client Transfer ID, cannot send duplicate ID
-account      | STRING | YES    | Either the token (e.g. USD, BTC, ETH) or the Balance ID (e.g. `1447779051242545455`) to be transferred.
+account      | STRING | YES    | Either the token (e.g. PHP, BTC, ETH) or the Balance ID (e.g. `1447779051242545455`) to be transferred.
 target_address   | STRING | YES    | The phone number or email for recipient account (e.g. `+63 9686490252` or `testsub@gmail.com`)
 amount      | BigDecimal | YES    | The amount being transferred
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time when the transfer is performed
 message     | STRING  | NO    | The message sent to the recipient account
+
+If the client_transfer_id or id parameter is passed in, the type parameter is invalid.
 
 **Request:**
 ```javascript
@@ -788,7 +846,7 @@ message     | STRING  | NO    | The message sent to the recipient account
 
 
 
-### Account information (USER_DATA)
+#### Account information (USER_DATA)
 
 ```shell
 GET /openapi/v1/account (HMAC SHA256)
@@ -815,47 +873,47 @@ timestamp | LONG | YES |
    "canWithdraw":true,
    "balances":[
       {
-         "asset":"BTC",
+         "asset":"456",
+         "free":"100",
+         "locked":"0"
+      },
+      {
+         "asset":"APE",
          "free":"0",
          "locked":"0"
       },
       {
-         "asset":"ETH",
-         "free":"0.000731",
-         "locked":"0"
-      },
-      {
-         "asset":"USDT",
-         "free":"0.4918",
+         "asset":"AXS",
+         "free":"0.00005",
          "locked":"0"
       }
    ],
-   "token":"USD",
+   "token":"PHP",
    "daily":{
-      "cashInLimit":"100000",
-      "cashInRemaining":"100000",
-      "cashOutLimit":"100000",
-      "cashOutRemaining":"100000",
-      "totalWithdrawLimit":"100000",
-      "totalWithdrawRemaining":"100000"
+      "cashInLimit":"500000",
+      "cashInRemaining":"499994",
+      "cashOutLimit":"500000",
+      "cashOutRemaining":"500000",
+      "totalWithdrawLimit":"500000",
+      "totalWithdrawRemaining":"500000"
    },
    "monthly":{
-      "cashInLimit":"3000000",
-      "cashInRemaining":"3000000",
-      "cashOutLimit":"3000000",
-      "cashOutRemaining":"3000000",
-      "totalWithdrawLimit":"3000000",
-      "totalWithdrawRemaining":"3000000"
+      "cashInLimit":"10000000",
+      "cashInRemaining":"9999157",
+      "cashOutLimit":"10000000",
+      "cashOutRemaining":"10000000",
+      "totalWithdrawLimit":"10000000",
+      "totalWithdrawRemaining":"10000000"
    },
    "annually":{
-      "cashInLimit":"36500000",
-      "cashInRemaining":"36500000",
-      "cashOutLimit":"36500000",
-      "cashOutRemaining":"36500000",
-      "totalWithdrawLimit":"36500000",
-      "totalWithdrawRemaining":"36499970.98"
+      "cashInLimit":"120000000",
+      "cashInRemaining":"119998577",
+      "cashOutLimit":"120000000",
+      "cashOutRemaining":"119999488",
+      "totalWithdrawLimit":"120000000",
+      "totalWithdrawRemaining":"119998487.97"
    },
-   "updateTime":1715308392448
+   "updateTime":1707273549694
 }
 ```
 
@@ -1131,7 +1189,7 @@ OR
     "price": "4.00000200"
   },
   {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCPHP",
     "price": "0.07946600"
   }
 ]
@@ -1188,7 +1246,7 @@ OR
     "askQty": "9.00000000"
   },
   {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCPHP",
     "bidPrice": "0.07946700",
     "bidQty": "9.00000000",
     "askPrice": "100000.00000000",
@@ -1196,6 +1254,7 @@ OR
   }
 ]
 ```
+
 
 
 #### Current average price
@@ -2213,7 +2272,7 @@ GET /openapi/v1/sub-account/list
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-email      | STRING | NO    | <a href="#request-parameters">Sub-account email</a>
+email      | STRING | NO    | Sub account email
 page    | INT | NO | Current page, default value: 1
 limit    | INT | NO | Quantity per page, default value 10, maximum `200`
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
@@ -2253,7 +2312,7 @@ POST /openapi/v1/sub-account/create
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-accountName      | STRING | YES       | <a href="#request-parameters">Sub-account email</a>
+accountName      | STRING | YES       | Sub account email
 recvWindow | LONG  | NO        | This value cannot be greater than `60000`
 timestamp     | LONG  | YES       | A point in time for which transfers are being queried.
 
@@ -2282,7 +2341,7 @@ GET /openapi/v1/sub-account/asset
 
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
-email      | STRING | YES       | <a href="#request-parameters">Sub-account email</a>
+email      | STRING | YES       | Sub account email
 recvWindow | LONG  | NO        | This value cannot be greater than `60000`
 timestamp     | LONG  | YES       | A point in time for which transfers are being queried.
 
@@ -2332,6 +2391,11 @@ timestamp     | LONG  | YES       | A point in time for which transfers are bein
 - Transfer from master account by default if fromEmail is not sent.
 - Transfer to master account by default if toEmail is not sent.
 - Specify at least one of fromEmail and toEmail.
+- Supported transfer scenarios:
+  - Master account transfer to sub-account 
+  - Sub-account transfer to master account 
+  - Sub-account transfer to Sub-account
+
 
 **Response:**
 ```json
@@ -2483,7 +2547,7 @@ GET /openapi/v1/sub-account/apikey/ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES        | 
-email      | STRING | YES        |  <a href="#request-parameters">Sub-account email</a>
+email      | STRING | YES        | 	Sub account email
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2514,9 +2578,9 @@ POST /openapi/v1/sub-account/apikey/add-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | NO        |   Can be added in batches, separated by commas
-ipRestriction      | STRING | YES       |   IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
+email      | STRING | YES       | 	Sub account email
+ipAddress      | STRING | NO        | 	Can be added in batches, separated by commas
+ipRestriction      | STRING | YES       | 	IP Restriction status. 2 = IP Unrestricted. 1 = Restrict access to trusted IPs only.
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2547,8 +2611,8 @@ POST /openapi/v1/sub-account/apikey/delete-ip-restriction
 Name       | Type   | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 apikey      | STRING | YES       |
-email      | STRING | YES       |   <a href="#request-parameters">Sub-account email</a>
-ipAddress      | STRING | YES       |   Can be added in batches, separated by commas
+email      | STRING | YES       | 	Sub account email
+ipAddress      | STRING | YES       | 	Can be added in batches, separated by commas
 recvWindow | LONG   | NO        | This value cannot be greater than `60000`
 timestamp     | LONG   | YES       | A point in time for which transfers are being queried.
 
@@ -2565,6 +2629,7 @@ timestamp     | LONG   | YES       | A point in time for which transfers are bei
   "updateTime": 1689744700710
 }
 ```
+
 
 ###  Get Sub-account Deposit Address(For Master Account)
 
@@ -2662,16 +2727,13 @@ Fetch deposit history.
 
 
 
-
-
 ### Convert endpoints
-
-#### Get supported trading pairs
+#### Get supported trading pairs (TRADE)
 ```shell
 POST /openapi/convert/v1/get-supported-trading-pairs
 ```
 
-This continuously updated endpoint returns a list of all available trading pairs. The response includes information on the minimum and maximum amounts that can be traded for the source currency, as well as the level of precision in decimal places used for the source currency.
+This continuously updated endpoint returns a list of all available trading pairs. 
 
 **Weight:** 1
 
@@ -2683,13 +2745,21 @@ This continuously updated endpoint returns a list of all available trading pairs
 
 **Response:**
 
+Field name	| Description
+----|---
+sourceCurrency	| Source token.
+targetCurrency	| Target token.
+minSourceAmount	| amount range min value.
+maxSourceAmount	| amount range max value.
+precision	| The level of precision in decimal places used.
+
 ```javascript
 {
-  "status":"Success",
+  "status":0, 
   "error":"OK",
   "data":[
      {
-      "sourceCurrency":"USD",
+      "sourceCurrency":"PHP",
       "targetCurrency":"BTC",
       "minSourceAmount":"1000",
       "maxSourceAmount":"15000",
@@ -2697,13 +2767,13 @@ This continuously updated endpoint returns a list of all available trading pairs
     },
     {
       "sourceCurrency":"BTC",
-      "targetCurrency":"USD",
+      "targetCurrency":"PHP",
       "minSourceAmount":"0.0001",
       "maxSourceAmount":"0.1",
       "precision":"8"
     },
     {
-      "sourceCurrency":"USD",
+      "sourceCurrency":"PHP",
       "targetCurrency":"ETH",
       "minSourceAmount":"1000",
       "maxSourceAmount":"18000",
@@ -2711,7 +2781,7 @@ This continuously updated endpoint returns a list of all available trading pairs
     },
     {
       "sourceCurrency":"ETH",
-      "targetCurrency":"USD",
+      "targetCurrency":"PHP",
       "minSourceAmount":"0.003",
       "maxSourceAmount":"4.2",
       "precision":"8"
@@ -2722,7 +2792,7 @@ This continuously updated endpoint returns a list of all available trading pairs
 
 
 
-#### Fetch a quote
+#### Fetch a quote (TRADE)
 
 ```shell
 POST /openapi/convert/v1/get-quote
@@ -2743,6 +2813,16 @@ targetAmount | STRING | NO        |The amount of targetCurrency. You only need t
 
 **Response:**
 
+Field name	| Description
+----|---
+quoteId	| Quote unique id.
+sourceCurrency	| Source token.
+targetCurrency	| Target token.
+sourceAmount	| Source token amount.
+price	| Trading pairs price.
+targetAmount	| Targe token amount.
+expiry	| Quote expire time seconds.
+
 ```javascript
 {
   "status": 0, 
@@ -2750,16 +2830,16 @@ targetAmount | STRING | NO        |The amount of targetCurrency. You only need t
   "data": {
             "quoteId": "2182b4fc18ff4556a18332245dba75ea",
             "sourceCurrency": "BTC",
-            "targetCurrency": "USD",
+            "targetCurrency": "PHP",
             "sourceAmount": "0.1",
-            "price": "59999",             //1BTC=59999USD
-            "targetAmount": "5999",       //The amount of USD the user holds
+            "price": "59999",             //1BTC=59999PHP
+            "targetAmount": "5999",       //The amount of PHP the user holds
             "expiry": "10"
   }
 }
 ```
 
-#### Accept the quote
+#### Accept the quote (TRADE)
 
 
 ```shell
@@ -2779,6 +2859,12 @@ quoteId | STRING | YES |The ID assigned to the quote
 
 **Response:**
 
+Field name	| Description
+----|---
+status	| 0 mean order are created. 
+data.orderId	| Order ID generated by the server.
+data.status	| The order status is an enumeration with values `SUCCESS`, `PROCESSING`;PROCESSING mean that the server is processing,SUCCESS means the order is successful.
+
 ```javascript
 {
   "status": 0, 
@@ -2790,7 +2876,19 @@ quoteId | STRING | YES |The ID assigned to the quote
 }
 ```
 
-#### Retrieve order history
+***Error code description:***
+
+status code           | Description
+----------------| ------------
+0 | means that the call is processed normally.(Applicable to other endpoint if there is a status structure)
+10000003 | Failed to fetch account verification information.
+10000003 | Quote expired.
+10000003 | Unable to fetch account information.
+10000003 | The price has changed! Please confirm the updated rate to complete the transaction.
+10000003 | Insufficient balance.
+10000003 | Failed to fetch liquidity. Try again later.
+
+#### Retrieve order history (USER_DATA)
 
 
 ```shell
@@ -2813,6 +2911,22 @@ size | int    | No |
 
 **Response:**
 
+Field name	| Description
+----|---
+orderId	| Order ID generated by the server.
+quoteId	| Order reference quote Id.
+userId	| user id.
+sourceCurrency	| source currency.
+targetCurrency	| target currency.
+sourceAmount	| source currency amount.
+targetAmount	| target currency amount.
+price	| price.
+status	| Order status.`TODO`, `SUCCESS`, `FAILED`, `PROCESSING`
+createdAt	| Order create time.
+errorMessage	| Error message if order failed.
+
+
+
 ```javascript
 {
   "status": 0,
@@ -2825,7 +2939,7 @@ size | int    | No |
       "userId":"",
       "sourceCurrency": "BTC",
       "sourceCurrencyIcon":"",
-      "targetCurrency": "USD",
+      "targetCurrency": "PHP",
       "targetCurrencyIcon":"",
       "sourceAmount": "0.11",
       "targetAmount": "4466.89275956",
@@ -2840,6 +2954,8 @@ size | int    | No |
   "total": 23
 }
 ```
+
+
 
 #### Query balance (USER_DATA)
 
@@ -2895,7 +3011,7 @@ to_address  |STRING|NO| The phone number or email for recipient account (e.g. +6
 recvWindow | LONG  | YES    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
 
-- If both the id and client_transfer_id parameters are passed, the id parameter will take precedence.
+- If client_transfer_id both the id and  parameters are passed, the id parameter will take precedence.
 - If the client_transfer_id or id parameter is passed, then the client_transfer_id or id takes precedence.
 - The from_address and to_address parameters cannot be passed simultaneously.
 
