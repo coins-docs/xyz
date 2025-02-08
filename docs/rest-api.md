@@ -23,9 +23,7 @@ nav: sidebar/rest-api.html
 
 2023-09-20: Added the `message` parameter to the `/openapi/transfer/v3/transfers` endpoint.
 
-2023-08-17: Updated `/openapi/convert/v1/accept-quote`, `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.
-
-2023-08-08: Updated `openapi/migration/v4/sellorder`, `openapi/migration/v4/validate-field`, `openapi/migration/v4/payout-outlets/{id}`, `openapi/migration/v4/payout-outlet-categories/{id}`, `openapi/migration/v4/payout-outlet-fees` docs.  
+2023-08-17: Updated `/openapi/convert/v1/accept-quote` docs.
 
 2023-07-15: Updated `MARKET order type now supports quantity for buy and quoteOrderQty for sell` 
 
@@ -33,15 +31,11 @@ nav: sidebar/rest-api.html
 
 2023-07-15: Added order status `EXPIRED`.
 
-2023-06-08: Added the `payment request` interface.
-
 2023-05-17: The disclaimer regarding the following endpoints being in the QA phase has been removed as the QA process has been successfully completed: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`.
 
 2023-05-08: Added the following endpoints: `/openapi/account/v3/crypto-accounts`, `/openapi/transfer/v3/transfers`, and `/openapi/transfer/v3/transfers/{id}`. The endpoints are still in QA and are appropriately marked as such.
 
-2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history` and `openapi/fiat/v1/history`; removed a personal detail from a code sample in `/openapi/fiat/v1/details`. 
-
-2023-04-13: Added the `invoice` interface.
+2023-05-04: Removed the endpoints `/openapi/convert/v1/query-order-history`. 
 
 2023-04-10: Added the `transfer` interfaces.
 
