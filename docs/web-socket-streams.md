@@ -7,6 +7,17 @@ layout: default
 
 
 
+# Change Log
+
+2023-07-15: update `Partial Book Depth`  support 200 levels and Update Speed.
+
+2022-10-11: add field as symbol,eventType,eventTime to Partial Depth Stream.
+
+2022-08-24: change /ws/ to /openapi/quote/ws 
+
+2022-08-19: add ping frame
+
+
 # Web Socket Streams for coins (2024-05-17)
 # General WSS information
 * The base endpoint is: **wss://wsapi.coins.xyz**
@@ -330,7 +341,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 ```javascript
 {
   "u":400900217,     // order book updateId
-  "s":"BNBUSDT",     // symbol
+  "s":"BTCPHP",     // symbol
   "b":"25.35190000", // best bid price
   "B":"31.21000000", // best bid qty
   "a":"25.36520000", // best ask price
@@ -362,7 +373,7 @@ Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 
 **Payload:**
 ```javascript
 {
-  "s": "XRPUSD",         //symbol
+  "s": "XRPPHP",         //symbol
   "e": "depth",          //eventType
   "E": 1665484484791,    //eventTime
   "lastUpdateId": 160,  // Last update ID
