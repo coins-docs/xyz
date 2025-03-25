@@ -7,6 +7,8 @@ layout: default
 
 
 # Change Log
+2025-03-25: update `Business Type (CHAIN_DEPOSIT, FIAT_DEPOSIT, TRADE, FEE, FIAT_WITHDRAWAL, CHAIN_WITHDRAWAL, CONVERT, DISTRIBUTION, P2P_TRANSFER, SPOT_TO_CREDIT, CREDIT_TO_SPOT, VIRTUAL_DISTRIBUTE, OTHERS)` to Balance Update endpoint
+
 2024-07-29: add `Business Type` to Balance Update endpoint
 
 
@@ -130,7 +132,7 @@ contains balance changed
   "a": "ETH",                   // Asset
   "d": "100.00000000",          // Balance Delta
   "T": 1573200697068,           // Clear Time
-  "bs": "CHAIN_DEPOSIT"         // Business Type (CHAIN_DEPOSIT, FIAT_DEPOSIT, FIAT_WITHDRAWAL, CHAIN_WITHDRAWAL, OTHERS)
+  "bs": "CHAIN_DEPOSIT"         // Business Type (CHAIN_DEPOSIT, FIAT_DEPOSIT, TRADE, FEE, FIAT_WITHDRAWAL, CHAIN_WITHDRAWAL, CONVERT, DISTRIBUTION, P2P_TRANSFER, SPOT_TO_CREDIT, CREDIT_TO_SPOT, VIRTUAL_DISTRIBUTE, OTHERS)
 }
 ```
 
