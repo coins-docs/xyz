@@ -7,6 +7,8 @@ nav: sidebar/rest-api.html
 ---
 
 # Change log:
+2025-05-21: Added the `statuses` parameter to the `/openapi/wallet/v1/deposit/history` endpoint.
+
 2025-03-25: Added the `/openapi/v1/asset/transaction/history` endpoint.
 
 2024-10-11: Added the `/openapi/v1/sub-account/wallet/deposit/address`,`/openapi/v1/sub-account/wallet/deposit/history` endpoint.
@@ -127,7 +129,7 @@ Postman collections are available, and they are recommended for new users seekin
 * When a 429 response code is received, it is mandatory for the API user to back off and refrain from making further requests.
 * **Repeated failure to comply with rate limits and a disregard for backing off after receiving 429 responses can result in an automated IP ban. The HTTP status code 418 is used for IP bans.**
 * IP bans are tracked and their duration increases for repeat offenders, ranging **from 2 minutes to 3 days**.
-* A `Retry-After` header iis included in 418 or 429 responses, indicating the number of seconds that need to be waited in order to prevent a ban (for 429) or until the ban is lifted (for 418).
+* A `Retry-After` header is included in 418 or 429 responses, indicating the number of seconds that need to be waited in order to prevent a ban (for 429) or until the ban is lifted (for 418).
 * **The limits imposed by the API are based on IP addresses rather than API keys**
 
 
@@ -477,7 +479,7 @@ Current exchange trading rules and symbol information
 | Name    | Type   | Mandatory | Description                                                  |
 | ------- | ------ | --------- | ------------------------------------------------------------ |
 | symbol  | STRING | NO        | Specify a trading pair, for example symbol=BTCPHP            |
-| symbols | STRING | NO        | Specify multiple trading pairs, such as symbols=%5B"BTCPHP","BTCUSDT"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["BTCPHP","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
+| symbols | STRING | NO        | Specify multiple trading pairs, such as `symbols=%5B"BTCPHP","BTCUSDT"%5D`, note that `%5B` represents `'['` left bracket, %5D represents `']'` right bracket. Direct use of the format ["BTCPHP","BTCUSDT"] is not supported as it is not RFC 3986 compliant. |
 
 **Response:**
 
@@ -678,7 +680,7 @@ Fetch deposit history.
 | coin       | STRING | NO        |                                                              |
 | txId       | STRING | NO        |                                                              |
 | status     | INT    | NO        | 0-PROCESSING, 1-SUCCESS, 2-FAILED, 3-NEED_FILL_DATA(travel rule info) |
-| statuses   | STRING | NO        | Specify multiple status, such as statuses=%5B"1","3"%5D, note that %5B represents '[' left bracket, %5D represents ']' right bracket. Direct use of the format ["1","3"] is not supported as it is not RFC 3986 compliant. |
+| statuses   | STRING | NO        | Specify multiple status, such as `statuses=%5B"1","3"%5D`, note that `%5B` represents `'['` left bracket, `%5D` represents `']'` right bracket. Direct use of the format `["1","3"]` is not supported as it is not RFC 3986 compliant. |
 | startTime  | LONG   | NO        | Default: 90 days from current timestamp                      |
 | endTime    | LONG   | NO        | Default: present timestamp                                   |
 | offset     | INT    | NO        | Default:0                                                    |
