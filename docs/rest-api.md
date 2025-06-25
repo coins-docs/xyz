@@ -813,7 +813,7 @@ This endpoint is used to transfer funds between two accounts.
 Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 client_transfer_id | STRING | NO | Client Transfer ID, cannot send duplicate ID
-account      | STRING | YES    | Either the token (e.g. PHP, BTC, ETH) or the Balance ID (e.g. `1447779051242545455`) to be transferred.
+account      | STRING | YES    | The token (e.g. BTC, ETH) to be transferred.
 target_address   | STRING | YES    | The phone number or email for recipient account (e.g. `+63 9686490252` or `testsub@gmail.com`)
 amount      | BigDecimal | YES    | The amount being transferred
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
