@@ -89,13 +89,13 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "Rest-Api":
-    - "/xyz/rest-api"
+    - "/rest-api"
   "Web-Socket-Streams":
-    - "/xyz/web-socket-streams"
+    - "/web-socket-streams"
   "User-Data-Stream":
-    - "/xyz/user-data-stream"
+    - "/user-data-stream"
   "Errors":
-    - "/xyz/errors"
+    - "/errors"
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
 
