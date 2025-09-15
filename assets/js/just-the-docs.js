@@ -210,7 +210,7 @@ function searchLoaded(index, docs) {
 
       var resultLink = document.createElement('a');
       resultLink.classList.add('search-result');
-      resultLink.setAttribute('href', '/xyz'+doc.url);
+      resultLink.setAttribute('href', doc.url);
       resultsListItem.appendChild(resultLink);
 
       var resultTitle = document.createElement('div');
