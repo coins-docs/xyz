@@ -351,7 +351,7 @@ function searchLoaded(index, docs) {
       {%- if site.search.rel_url != false %}
       var resultRelUrl = document.createElement('span');
       resultRelUrl.classList.add('search-result-rel-url');
-      resultRelUrl.innerText = '/xyz'+doc.relUrl;
+      resultRelUrl.innerText = doc.relUrl;
       resultTitle.appendChild(resultRelUrl);
       {%- endif %}
     }
