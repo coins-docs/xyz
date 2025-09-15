@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Coins.xyz
-description: 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://just-the-docs.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+title: Coins.xyz API Documentation
+description: Complete API documentation for Coins.xyz cryptocurrency exchange. REST API, WebSocket streams, user data endpoints, and integration guides for developers.
+baseurl: "/xyz" # the subpath of your site, e.g. /blog
+url: "https://docs.coins.ph/xyz" # the base hostname & protocol for your site, e.g. http://example.com
 
 permalink: pretty
 
