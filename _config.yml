@@ -16,7 +16,7 @@
 title: Coins.xyz API Documentation
 description: Complete API documentation for Coins.xyz cryptocurrency exchange. REST API, WebSocket streams, user data endpoints, and integration guides for developers.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://docs.coins.ph/xyz" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://docs.coins.ph" # the base hostname & protocol for your site, e.g. http://example.com
 
 permalink: pretty
 
