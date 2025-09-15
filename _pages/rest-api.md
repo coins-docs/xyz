@@ -1,6 +1,6 @@
 ---
 title: "Posts by Year"
-permalink: /xyz/rest-api/
+permalink: /rest-api/
 # layout: posts
 author_profile: true
 ---
