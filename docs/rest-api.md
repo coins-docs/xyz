@@ -954,7 +954,7 @@ timestamp | LONG | YES |
 [
    {
       "apiKey":"QdGqqftMXzW3qKceYHqwRjjvQvBsdVsMb1OFg4kOuVgV07lnTsh9jIJJLsXrOLug",
-      "apiName":"test",
+      "apiName":"your API name",
       "apiType":[
          "Enable Spot",
          "Enable Convert",
@@ -965,25 +965,21 @@ timestamp | LONG | YES |
       "createTime":"1711520996538",
       "ipAccessRestrictions":[
          "57.181.16.43",
-         "1.1.1.1",
-         "1.1.1.2"
+         "57.181.16.55"
       ],
-      "status":"NOT_ENABLE"
+      "status":"ENABLE"
    },
    {
       "apiKey":"oys7XrwQSV6SHvjRzWFTFWgmano88vm2iz8QCf6FN6VXYPbYVe7m6HmHqgkmYABF",
-      "apiName":"test",
+      "apiName":"your API name",
       "apiType":[
-         "Enable Spot",
-         "Enable Convert",
-         "Enable Fiat",
-         "Enable Crypto Wallet"
+         "Read only",
       ],
       "createTime":"1711537457048",
       "ipAccessRestrictions":[
          "57.181.16.43"
       ],
-      "status":"ENABLE"
+      "status":"NOT_ENABLE"
    }
 ]
 ```
