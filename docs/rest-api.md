@@ -818,7 +818,7 @@ Name       | Type  | Mandatory | Description
 -----------------|--------|-----------|--------------------------------------------------------------------------------------
 client_transfer_id | STRING | NO | Client Transfer ID, cannot send duplicate ID
 account      | STRING | YES    | The token (e.g. BTC, ETH) to be transferred.
-target_address   | STRING | YES    | The phone number or email for recipient account (e.g. `+63 9686490252` or `testsub@gmail.com`)
+target_address   | STRING | YES    | The phone number or email for recipient account (e.g. `+63 9686490252` or `test@coins.ph`)
 amount      | BigDecimal | YES    | The amount being transferred
 recvWindow | LONG  | NO    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time when the transfer is performed
@@ -843,7 +843,7 @@ If the client_transfer_id or id parameter is passed in, the type parameter is in
       "id": "1451431230880900352",
       "status": "success",//status enum: pending,success,failed
       "account": "90dfg03goamdf02fs",
-      "target_address": "testsub@gmail.com",
+      "target_address": "test@coins.ph",
       "amount": "1",
       "exchange": "1",
       "payment": "23094j0amd0fmag9agjgasd",
@@ -881,7 +881,7 @@ timestamp | LONG | YES |
    "canDeposit":true,
    "canTrade":true,
    "canWithdraw":true,
-   "email": "testsub@gmail.com",
+   "email": "test@coins.ph",
    "enableWithdrawWhitelist": true,
    "balances":[
       {
@@ -2503,12 +2503,12 @@ timestamp     | LONG  | YES    | A point in time for which transfers are being q
   "subAccounts": [
     {
       "createTime": "1689744671462",
-      "email": "testsub@gmail.com",
+      "email": "test@coins.ph",
       "isFreeze": false
     },
     {
       "createTime": "1689744700710",
-      "email": "testsub2@gmail.com",
+      "email": "test1@coins.ph",
       "isFreeze": false
     }
   ],
@@ -2538,7 +2538,7 @@ timestamp     | LONG  | YES       | A point in time for which transfers are bein
 **Response:**
 ```json
 {
-  "email": "testsub@gmail.com",
+  "email": "test@coins.ph",
   "createTime": 1689744700710,
   "isFreeze": false
 }
@@ -2690,8 +2690,8 @@ timestamp     | LONG  | YES       | A point in time for which transfers are bein
   "result": [
     {
       "clientTranId": "1",
-      "fromEmail": "testsub@gmail",
-      "toEmail": "testsub1@gmail",
+      "fromEmail": "test@coins.ph",
+      "toEmail": "test1@coins.ph",
       "asset": "BTC",
       "amount": "0.1",
       "createdAt": 1689744700710,
@@ -2737,8 +2737,8 @@ clientTranId     | STRING   | NO       |
   "result": [
     {
       "clientTranId": "1",
-      "fromEmail": "testsub@gmail",
-      "toEmail": "testsub1@gmail",
+      "fromEmail": "test@coins.ph",
+      "toEmail": "test1@coins.ph",
       "asset": "BTC",
       "amount": "0.1",
       "createdAt": 1689744700710,
@@ -3075,8 +3075,8 @@ id      | STRING | NO    | ID of the transfer record
 client_transfer_id| STRING | NO | Client Transfer ID, Maximum length 100
 page    | INT | NO | Current page, default is `1`
 per_page    | INT | NO | Quantity per page, default 2000, maximum `2000`
-from_address |STRING|NO| The phone number or email for sender account (e.g. +63 9686490252 or testsub@gmail.com)
-to_address  |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or testsub@gmail.com)
+from_address |STRING|NO| The phone number or email for sender account (e.g. +63 9686490252 or test@coins.ph)
+to_address  |STRING|NO| The phone number or email for recipient account (e.g. +63 9686490252 or test@coins.ph)
 recvWindow | LONG  | YES    | This value cannot be greater than `60000`
 timestamp     | LONG  | YES    | A point in time for which transfers are being queried.
 
