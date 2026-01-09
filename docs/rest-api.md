@@ -7,7 +7,7 @@ nav: sidebar/rest-api.html
 ---
 
 # Change log:
-2026-01-09: Added the ``/openapi/transfer/v4/transfers` endpoint which guarantees JSON-formatted responses for both success and error cases.
+2026-01-09: Added the `/openapi/transfer/v4/transfers` endpoint which guarantees JSON-formatted responses for both success and error cases.
 
 2025-11-05: Added the `/openapi/wallet/v1/withdraw/address-whitelist` endpoint for checking system status. 
 
