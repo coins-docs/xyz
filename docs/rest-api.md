@@ -894,8 +894,8 @@ Get withdraw address whitelist for the user.
 #### Transfers (USER_DATA)
 
 ```shell
-POST /openapi/transfer/v3/transfers (Legacy)
 POST /openapi/transfer/v4/transfers
+POST /openapi/transfer/v3/transfers (Legacy)
 ```
 
 This endpoint is used to transfer funds between two accounts.
