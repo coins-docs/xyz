@@ -7,6 +7,8 @@ nav: sidebar/rest-api.html
 ---
 
 # Change log:
+2026-03-16: Change the IP rate limit from 1200 requests to 120 requests per minute, UID rate limit from 1800 requests to 180 requests per minute.
+
 2026-01-09: Added the `/openapi/transfer/v4/transfers` endpoint which guarantees JSON-formatted responses for both success and error cases.
 
 2025-11-05: Added the `/openapi/wallet/v1/withdraw/address-whitelist` endpoint for checking system status. 
