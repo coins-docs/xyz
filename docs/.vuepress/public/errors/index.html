@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
+  <script>
+    (function () {
+      // 明确跳转至静态页面，避免服务器将无扩展名路径重定向回目录。
+      var path = window.location.pathname.replace(/\/+$/, '');
+      window.location.replace(path + '.html' + window.location.search + window.location.hash);
+    })();
+  </script>
+</head>
+<body>
+  <noscript><a href="../errors.html">Continue</a></noscript>
+</body>
+</html>
