@@ -748,6 +748,15 @@ const handleSearch = () => {
   }, 300)
 }
 
+// 文档正文可能包含类似 HTML 标签的示例，渲染前必须转义为纯文本。
+const escapePreviewText = (text) => text.replace(/[&<>"']/g, (char) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}[char]))
+
 // 获取文本预览
 const getTextPreview = (text, query) => {
   // 清理文本，移除多余的空白字符
@@ -756,7 +765,7 @@ const getTextPreview = (text, query) => {
   // 找到查询字符串的位置
   const queryIndex = cleanText.toLowerCase().indexOf(query.toLowerCase())
   
-  if (queryIndex === -1) return cleanText.substring(0, 100) + '...'
+  if (queryIndex === -1) return escapePreviewText(cleanText.substring(0, 100)) + '...'
   
   const start = Math.max(0, queryIndex - 40)
   const end = Math.min(cleanText.length, queryIndex + query.length + 40)
@@ -767,7 +776,10 @@ const getTextPreview = (text, query) => {
   
   // 高亮查询字符串（完整匹配）
   const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
-  preview = preview.replace(regex, '<mark>$1</mark>')
+  // 先按原文拆分匹配片段，再分别转义，避免实体字符影响高亮。
+  preview = preview.split(regex).map((part, index) =>
+    index % 2 ? `<mark>${escapePreviewText(part)}</mark>` : escapePreviewText(part)
+  ).join('')
   
   return preview
 }
