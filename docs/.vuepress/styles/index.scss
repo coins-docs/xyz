@@ -1,0 +1,859 @@
+// 自定义CSS变量
+:root {
+  --c-brand: #1976d2;
+  --c-brand-light: #42a5f5;
+  --c-brand-dark: #1565c0;
+  --c-text: #2c3e50;
+  --c-text-light: #7f8c8d;
+  --c-bg: #ffffff;
+  --c-bg-light: #f8f9fa;
+  --c-border: #e1e8ed;
+  --sidebar-width: 300px;
+  --c-accent: #00bcd4;
+  --c-success: #4caf50;
+  --c-warning: #ff9800;
+  --c-danger: #f44336;
+}
+
+// 暗色主题 - 专业配色方案
+.dark {
+  --c-bg: #1e1e2f;
+  --c-bg-light: #2a2a3c;
+  --c-text: #f5f5f5;
+  --c-text-light: #a0a0a0;
+  --c-border: #2f2f40;
+  --c-brand: #4fc1ff;
+  --c-brand-light: #00bfff;
+  --c-brand-dark: #3a9ce8;
+  --c-accent: #7ec699;
+  --c-success: #50fa7b;
+  --c-warning: #ff9d00;
+  --c-danger: #ff5555;
+  
+  // 强制覆盖所有可能的背景色
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  // 深色模式下的主体背景 - 专业深紫灰
+  body {
+    background: linear-gradient(135deg, #1e1e2f 0%, #0e0e16 50%, #1e1e2f 100%) !important;
+  }
+  
+  // 深色模式下的页面容器
+  .page {
+    background: transparent !important;
+  }
+  
+  // 深色模式下的主要容器
+  .theme-container {
+    background: transparent !important;
+  }
+  
+  // 强制覆盖所有可能的容器背景
+  // div, section, article, main {
+  //   background-color: transparent !important;
+  // }
+  
+  // 深色模式下的导航栏
+  .navbar {
+    background: linear-gradient(90deg, rgba(47, 47, 64, 0.95) 0%, rgba(52, 52, 72, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--c-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  .header-text {
+    color: #88888F!important;
+    
+  }
+  .header-link.active .header-text{
+    color: #fff!important;
+  }
+  // 深色模式下的侧边栏
+  .sidebar {
+    background: linear-gradient(180deg, rgba(47, 47, 64, 0.95) 0%, rgba(52, 52, 72, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    border-right: 1px solid var(--c-border);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+   
+  }
+  
+  // 深色模式下的内容区域背景
+  .theme-default-content {
+    background: rgba(30, 30, 47, 0.9) !important;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--c-border);
+    margin: 1rem;
+    padding: 2rem;
+  }
+  
+  // 确保主内容容器也是透明
+  .page-content {
+    background: transparent !important;
+  }
+  
+  .nav-link.is-active {
+    color: #FAFAFA!important;
+  }
+  .nav-link {
+    color: #88888F!important;
+  }
+  // 确保整个内容包装器是透明
+  .content-wrapper {
+    background: #000 !important;
+  }
+  .navbar-content {
+    background: #000 !important;
+  }
+  // 特别针对内容区域的强制覆盖
+  .theme-default-content,
+  .theme-default-content div,
+  .theme-default-content section,
+  .theme-default-content main,
+  .content__default {
+    background: transparent !important;
+  }
+  
+  // 深色模式下的代码块 - 专业代码配色
+  .theme-default-content pre {
+    background: linear-gradient(135deg, #2a2a3c 0%, #1e1e30 100%);
+    border: 1px solid var(--c-border);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    
+    code {
+      color: #e6e6e6;
+      font-family: 'Fira Code', 'JetBrains Mono', 'Monaco', 'Menlo', monospace;
+    }
+  }
+  
+  // 内联代码样式
+  .theme-default-content p code,
+  .theme-default-content li code {
+    background: linear-gradient(135deg, #2a2a3c 0%, rgba(79, 193, 255, 0.1) 100%);
+    color: #e6e6e6;
+    border: 1px solid var(--c-border);
+  }
+  
+  // 深色模式下的表格
+  .theme-default-content table {
+    background: rgba(47, 47, 64, 0.8) !important;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    
+    th {
+      background: linear-gradient(90deg, rgba(79, 193, 255, 0.25) 0%, rgba(0, 191, 255, 0.25) 100%) !important;
+      border-color: var(--c-border);
+      color: var(--c-brand-light) !important;
+      font-weight: 600;
+    }
+    
+    td {
+      background-color: rgba(47, 47, 64, 0.4) !important;
+      border-color: var(--c-border);
+      color: #e5e5e5 !important;
+    }
+    
+    tbody tr:nth-child(odd) td {
+      background: #fff!important;
+      color: #e5e5e5 !important;
+    }
+    
+    tbody tr:nth-child(even) td {
+      background: rgba(47, 47, 64, 0.6) !important;
+      color: #e5e5e5 !important;
+    }
+    
+    tr:hover td {
+      background-color: rgba(79, 193, 255, 0.15) !important;
+      color: #ffffff !important;
+      transition: all 0.3s ease;
+    }
+    
+    // 确保所有表格内容的文字颜色
+    th, td {
+      p, span, div, strong, em, code {
+        color: inherit !important;
+      }
+    }
+    
+    // 特别针对表格中的代码
+    code {
+      background: rgba(42, 42, 60, 0.8) !important;
+      color: #f8f8f2 !important;
+      border: 1px solid rgba(79, 193, 255, 0.3);
+    }
+  }
+  
+  // 额外覆盖 VuePress 默认表格样式
+  table {
+    tbody tr:nth-child(odd) {
+      background: rgba(47, 47, 64, 0.6) !important;
+      
+      td {
+        background: rgba(42, 42, 60, 0.5) !important;
+        color: #e5e5e5 !important;
+      }
+    }
+    
+    tbody tr:nth-child(even) {
+      background: rgba(47, 47, 64, 0.6) !important;
+      
+      td {
+        background: rgba(47, 47, 64, 0.6) !important;
+        color: #e5e5e5 !important;
+      }
+    }
+  }
+  
+  // 深色模式下的引用块
+  .theme-default-content blockquote {
+    background: linear-gradient(90deg, rgba(79, 193, 255, 0.15) 0%, rgba(79, 193, 255, 0.08) 100%);
+    border-left: 4px solid var(--c-brand);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+  }
+  
+  // 深色模式下的链接
+  .theme-default-content a {
+    color: var(--c-brand);
+    
+    &:hover {
+      color: var(--c-brand-light);
+      text-shadow: 0 0 8px rgba(79, 193, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+  }
+  
+  // 深色模式下的标题优化
+  .theme-default-content h1 {
+    background: linear-gradient(45deg, var(--c-brand) 0%, var(--c-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .theme-default-content h2 {
+    color: var(--c-text);
+    border-bottom-color: var(--c-border);
+    
+    &::after {
+      background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+    }
+  }
+  
+  .theme-default-content h3 {
+    color: var(--c-brand);
+  }
+  
+  // 深色模式下的搜索框
+  .search-box input {
+    background-color: rgba(47, 47, 64, 0.8);
+    border: 1px solid var(--c-border);
+    color: var(--c-text);
+    backdrop-filter: blur(8px);
+    
+    &:focus {
+      // border-color: var(--c-brand);
+      // box-shadow: 0 0 0 2px rgba(79, 193, 255, 0.3);
+    }
+  }
+  
+  // 成功、警告、错误状态样式
+  .theme-default-content .custom-container.tip {
+    border-color: var(--c-success);
+    background: linear-gradient(90deg, rgba(80, 250, 123, 0.1) 0%, rgba(80, 250, 123, 0.05) 100%);
+  }
+  
+  .theme-default-content .custom-container.warning {
+    border-color: var(--c-warning);
+    background: linear-gradient(90deg, rgba(255, 157, 0, 0.1) 0%, rgba(255, 157, 0, 0.05) 100%);
+  }
+  
+  .theme-default-content .custom-container.danger {
+    border-color: var(--c-danger);
+    background: linear-gradient(90deg, rgba(255, 85, 85, 0.1) 0%, rgba(255, 85, 85, 0.05) 100%);
+  }
+  
+  // 深色模式下的文字选择效果
+  *::selection,
+  ::selection {
+    background: linear-gradient(45deg, rgba(79, 193, 255, 0.6) 0%, rgba(0, 191, 255, 0.8) 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(2px);
+  }
+  
+  *::-moz-selection,
+  ::-moz-selection {
+    background: linear-gradient(45deg, rgba(79, 193, 255, 0.6) 0%, rgba(0, 191, 255, 0.8) 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  // 确保深色模式下特定元素的选择样式
+  code::selection,
+  p::selection,
+  h1::selection,
+  h2::selection,
+  h3::selection,
+  h4::selection,
+  h5::selection,
+  h6::selection,
+  div::selection,
+  span::selection,
+  strong::selection,
+  em::selection,
+  a::selection,
+  li::selection,
+  table::selection,
+  td::selection,
+  th::selection {
+    background: rgba(79, 193, 255, 0.7) !important;
+    color: #ffffff !important;
+  }
+  
+  p::-moz-selection,
+  h1::-moz-selection,
+  h2::-moz-selection,
+  h3::-moz-selection,
+  h4::-moz-selection,
+  h5::-moz-selection,
+  h6::-moz-selection,
+  div::-moz-selection,
+  span::-moz-selection,
+  strong::-moz-selection,
+  em::-moz-selection,
+  a::-moz-selection,
+  li::-moz-selection,
+  table::-moz-selection,
+  td::-moz-selection,
+  th::-moz-selection {
+    background: rgba(79, 193, 255, 0.7) !important;
+    color: #ffffff !important;
+  }
+}
+
+// 全局样式重置
+* {
+  box-sizing: border-box;
+}
+tbody tr:nth-child(odd) {
+  background: #fff !important;
+}
+// 外部锚点链接首次加载时直接定位，避免页面先闪现顶部再滚动。
+// 页面内目录和搜索跳转由组件显式使用 smooth，仍保留平滑体验。
+// VuePress 默认使用 :root 设置 smooth；保持相同选择器优先级，确保首次深链直接定位。
+:root {
+  scroll-behavior: auto;
+  scroll-padding-top: 80px; // 导航栏高度60px，然后向下滚动60px，所以是0px
+}
+
+// 浏览器和 VuePress 在首次处理 URL hash 时会滚动到目标标题。
+// 使用标题自身的滚动边距，确保锚点不会被固定导航栏遮住。
+.theme-default-content h1,
+.theme-default-content h2,
+.theme-default-content h3,
+.theme-default-content h4,
+.theme-default-content h5,
+.theme-default-content h6 {
+  scroll-margin-top: 80px;
+}
+
+// 页面布局
+.theme-default-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+  }
+}
+.back-to-top {
+  background: linear-gradient(135deg, var(--c-brand) 0%, var(--c-brand-light) 100%) !important;
+  color: white !important;
+  border: 1px solid rgba(25, 118, 210, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.4) !important;
+}
+// 侧边栏样式增强
+.sidebar {
+  width: var(--sidebar-width) !important;
+  background-color: var(--c-bg-light);
+  border-right: 1px solid var(--c-border);
+  transition: all 0.3s ease;
+  
+  .sidebar-group {
+    .sidebar-group-items {
+      .sidebar-item {
+        a {
+          color: var(--c-text);
+          font-weight: 500;
+          padding: 0.7rem 1.2rem;
+          border-radius: 8px;
+          margin: 0.3rem 0.8rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+          }
+          
+          &:hover {
+            background: linear-gradient(135deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+            color: white;
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+            
+            &::before {
+              left: 100%;
+            }
+          }
+          
+          &.router-link-active {
+            background: linear-gradient(135deg, var(--c-brand) 0%, var(--c-brand-dark) 100%);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 侧边栏标题样式增强
+.sidebar-group-items .sidebar-heading {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--c-brand);
+  padding: 1.2rem 1rem 0.8rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--c-border);
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 1rem;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+  }
+}
+
+// 导航栏样式增强
+.navbar {
+  background-color: var(--c-bg);
+  border-bottom: 1px solid var(--c-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  
+  .navbar-items {
+    .navbar-item {
+      a {
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+        
+        &:hover {
+          color: var(--c-brand);
+          background-color: rgba(25, 118, 210, 0.1);
+          
+          &::after {
+            width: 80%;
+          }
+        }
+        
+        &.router-link-active {
+          color: var(--c-brand);
+          font-weight: 600;
+          background-color: rgba(25, 118, 210, 0.1);
+          
+          &::after {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 内容区域样式增强
+.theme-default-content {
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--c-text);
+    font-weight: 600;
+    position: relative;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  h1 {
+    font-size: 2.8rem;
+    background: linear-gradient(45deg, var(--c-brand) 0%, var(--c-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--c-brand) 0%, var(--c-accent) 100%) 1;
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+    border-bottom: 2px solid var(--c-border);
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+    }
+  }
+  
+  h3 {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--c-brand);
+  }
+  
+  // 代码块样式增强
+  pre {
+    background-color: var(--c-bg-light);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-accent) 100%);
+      border-radius: 12px 12px 0 0;
+    }
+    
+    code {
+      color: var(--c-text);
+      font-family: 'Fira Code', 'JetBrains Mono', 'Monaco', 'Menlo', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  }
+  
+  // 内联代码样式增强
+  p code, li code {
+    background: linear-gradient(135deg, var(--c-bg-light) 0%, rgba(25, 118, 210, 0.1) 100%);
+    color: var(--c-brand);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border: 1px solid rgba(25, 118, 210, 0.2);
+  }
+  
+  // 表格样式增强
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    th, td {
+      border: 1px solid var(--c-border);
+      padding: 1rem 1.2rem;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+    
+    th {
+      background: linear-gradient(135deg, var(--c-bg-light) 0%, var(--c-border) 100%);
+      font-weight: 600;
+      color: var(--c-brand);
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: var(--c-bg-light);
+    }
+    
+    tr:hover {
+      background-color: rgba(25, 118, 210, 0.05);
+    }
+  }
+  
+  // 引用块样式增强
+  blockquote {
+    border-left: 4px solid var(--c-brand);
+    background: linear-gradient(90deg, rgba(25, 118, 210, 0.1) 0%, rgba(25, 118, 210, 0.05) 100%);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    &::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      font-size: 4rem;
+      color: var(--c-brand);
+      opacity: 0.3;
+      font-family: serif;
+    }
+    
+    p {
+      margin: 0;
+      font-style: italic;
+      color: var(--c-text-light);
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+  }
+  
+  // 链接样式增强
+  a {
+    color: var(--c-brand);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+      transition: width 0.3s ease;
+    }
+    
+    &:hover {
+      color: var(--c-brand-light);
+      
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// 页面过渡动画增强
+.page-enter-active, .page-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+// 响应式设计增强
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100% !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &.open {
+      transform: translateX(0);
+    }
+  }
+  
+  .theme-default-content {
+    margin-left: 0 !important;
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    table {
+      font-size: 0.9rem;
+      
+      th, td {
+        padding: 0.8rem;
+      }
+    }
+  }
+
+  // 长代码示例和宽表格在容器内横向滚动，避免把整页撑出屏幕。
+  .page-main {
+    min-width: 0;
+
+    div[class*='language-'],
+    table {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      display: block;
+    }
+  }
+}
+
+// 使用浏览器默认滚动条样式（已移除自定义蓝色滚动条）
+
+// 主题切换按钮样式增强
+.toggle-dark-button {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  }
+}
+
+// 搜索框样式增强
+.search-box {
+  .search-button {
+    background: linear-gradient(135deg, var(--c-brand) 0%, var(--c-brand-light) 100%);
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      // box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    }
+  }
+  
+  input {
+    border-radius: 8px;
+    border: 1px solid var(--c-border);
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    transition: all 0.3s ease;
+    
+    &:focus {
+      border-color: var(--c-brand);
+      // box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+      outline: none;
+    }
+  }
+}
+
+// 选择文本样式增强 - 浅色模式
+*::selection,
+::selection {
+  background: linear-gradient(45deg, #1976d2 0%, #1565c0 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+*::-moz-selection,
+::-moz-selection {
+  background: linear-gradient(45deg, #1976d2 0%, #1565c0 100%) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+// 确保特定元素的选择样式
+code::selection,
+p::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+div::selection,
+span::selection,
+strong::selection,
+em::selection,
+a::selection,
+li::selection,
+table::selection,
+td::selection,
+th::selection {
+  background: #1976d2 !important;
+  color: #ffffff !important;
+}
+
+p::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection,
+h4::-moz-selection,
+h5::-moz-selection,
+h6::-moz-selection,
+div::-moz-selection,
+span::-moz-selection,
+strong::-moz-selection,
+em::-moz-selection,
+a::-moz-selection,
+li::-moz-selection,
+table::-moz-selection,
+td::-moz-selection,
+th::-moz-selection {
+  background: #1976d2 !important;
+  color: #ffffff !important;
+}

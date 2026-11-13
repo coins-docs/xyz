@@ -1,12 +1,8 @@
 ---
-permalink: /user-data-stream/
-title: "User-Data-Stream"
-nav: sidebar/user-data-stream.html
-layout: default
+title: "User Data Stream"
 ---
 
-
-# Change Log
+## Change Log
 2025-03-25: update `Business Type (CHAIN_DEPOSIT, FIAT_DEPOSIT, TRADE, FEE, FIAT_WITHDRAWAL, CHAIN_WITHDRAWAL, CONVERT, DISTRIBUTION, P2P_TRANSFER, SPOT_TO_CREDIT, CREDIT_TO_SPOT, VIRTUAL_DISTRIBUTE, OTHERS)` to Balance Update endpoint
 
 2024-10-16: add `account email` and `busienss serial number` to Balance Update endpoint, add `account email` to Account Update endpoint.
@@ -18,7 +14,7 @@ layout: default
 2022-08-19: add weight infomation for all interfaces
 
 
-# User Data Streams for Coins (2024-05-17)
+**User Data Streams for Coins (2024-05-17)**
 
 ## General WSS information
 
