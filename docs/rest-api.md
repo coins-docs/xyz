@@ -1,12 +1,8 @@
 ---
-title: "Rest-Api"
-permalink: /rest-api/
-layout: default
-nav: sidebar/rest-api.html
-
+title: "REST API"
 ---
 
-# Change log:
+## Change log:
 2026-11-11: Added the `/openapi/convert/v1/manual-settle` endpoint
 
 2026-03-16: Change the IP rate limit from 1200 requests to 120 requests per minute, UID rate limit from 1800 requests to 180 requests per minute.
@@ -71,7 +67,7 @@ nav: sidebar/rest-api.html
 
 <!--more-->
 
-# Public Rest API for Coins (2024-05-17)
+**Public Rest API for Coins (2024-05-17)**
 
 ## General API Information
 
@@ -3407,6 +3403,3 @@ timestamp     | LONG  | YES       | A point in time for which transfers are bein
   }
 }
 ```
-
-
-

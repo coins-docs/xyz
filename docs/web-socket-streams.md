@@ -1,13 +1,8 @@
 ---
-title: "Web-Socket-Streams"
-permalink: /web-socket-streams/
-nav: sidebar/web-socket-streams.html
-layout: default
+title: "Web Socket Streams"
 ---
 
-
-
-# Change Log
+## Change Log
 
 2023-07-15: update `Partial Book Depth`  support 200 levels and Update Speed.
 
@@ -18,8 +13,8 @@ layout: default
 2022-08-19: add ping frame
 
 
-# Web Socket Streams for coins (2024-05-17)
-# General WSS information
+**Web Socket Streams for Coins (2024-05-17)**
+## General WSS information
 * The base endpoint is: **wss://wsapi.coins.xyz**
 * Streams can be accessed either in a single raw stream or in a combined stream
 * Raw streams are accessed at **/openapi/quote/ws/v3/\<streamName\>**
@@ -129,8 +124,8 @@ Error Message | Description
 {"code":"-100010","desc":"Invalid Symbols!"} | JSON data sent include symbol not supported.
 
 
-# Detailed Stream information
-## Aggregate Trade Streams
+## Detailed Stream information
+### Aggregate Trade Streams
 The Aggregate Trade Streams push trade information that is aggregated for a single taker order.
 
 **Stream Name:** \<symbol\>@aggTrade
@@ -154,7 +149,7 @@ The Aggregate Trade Streams push trade information that is aggregated for a sing
 }
 ```
 
-## Trade Streams
+### Trade Streams
 The Trade Streams push raw trade information; each trade has a unique buyer and seller.
 
 **Stream Name:** \<symbol\>@trade
@@ -178,7 +173,7 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 }
 ```
 
-## Kline/Candlestick Streams
+### Kline/Candlestick Streams
 The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
 
 **Kline/Candlestick chart intervals:**
@@ -233,7 +228,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 }
 ```
 
-## Individual Symbol Mini Ticker Stream
+### Individual Symbol Mini Ticker Stream
 24hr rolling window mini-ticker statistics. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.The start time always starts on a minute, while the closing time is the current time of the update. As such, the effective window might be up to 59999ms wider that <window_size>.
 for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (60 * 1000) * 60 * 1000
 
@@ -256,7 +251,7 @@ for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (6
   }
 ```
 
-## All Market Mini Tickers Stream
+### All Market Mini Tickers Stream
 24hr rolling window mini-ticker statistics for all symbols that changed in an array. Note that only tickers that have changed will be present in the array.
 The open time "O" always starts on a minute, while the closing time "C" is the current time of the update. As such, the effective window might be up to 59999ms wider that <window_size>.
 for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (60 * 1000) * 60 * 1000
@@ -274,7 +269,7 @@ for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (6
 ]
 ```
 
-## Individual Symbol Ticker Streams
+### Individual Symbol Ticker Streams
 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
 The open time "O" always starts on a minute, while the closing time "C" is the current time of the update.
 for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (60 * 1000) * 60 * 1000
@@ -312,7 +307,7 @@ for example: startTime = (System.currentTimeMillis() - 24 * 60 * 60 * 1000) / (6
 }
 ```
 
-## All Market Tickers Stream
+### All Market Tickers Stream
 24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
 The open time "O" always starts on a minute, while the closing time "C" is the current time of the update. As such, the effective window might be up to 59999ms wider that <window_size>.
 
@@ -330,7 +325,7 @@ The open time "O" always starts on a minute, while the closing time "C" is the c
 ```
 
 
-## Individual Symbol Book Ticker Streams
+### Individual Symbol Book Ticker Streams
 Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
 
 **Stream Name:** \<symbol\>@bookTicker
@@ -349,7 +344,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 }
 ```
 
-## All Book Tickers Stream
+### All Book Tickers Stream
 Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
 
 **Stream Name:** !bookTicker
@@ -363,7 +358,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for al
 }
 ```
 
-## Partial Book Depth Streams
+### Partial Book Depth Streams
 Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 5, 10, 20 or 200.
 
 **Stream Names:** \<symbol\>@depth\<levels\> OR \<symbol\>@depth\<levels\>@100ms
@@ -392,7 +387,7 @@ Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 
 }
 ```
 
-## Diff. Depth Stream
+### Diff. Depth Stream
 Order book price and quantity depth updates used to locally manage an order book.
 
 **Stream Name:** \<symbol\>@depth OR \<symbol\>@depth@100ms
@@ -422,7 +417,7 @@ Order book price and quantity depth updates used to locally manage an order book
 }
 ```
 
-## How to manage a local order book correctly
+### How to manage a local order book correctly
 1. Open a stream to **wss://wsapi.coins.xyz/openapi/quote/stream?streams=btcusdt@depth**.
 2. Buffer the events you receive from the stream.
 3. Get a depth snapshot from **https://api.coins.xyz/openapi/quote/v1/depth?symbol=BTCUSDT** .
@@ -434,4 +429,4 @@ Order book price and quantity depth updates used to locally manage an order book
 9. Receiving an event that removes a price level that is not in your local order book can happen and is normal.
 
 Note: 
-Due to depth snapshots having a limit on the number of price levels, a price level outside of the initial snapshot that doesn't have a quantity change won't have an update in the Diff. Depth Stream. Consequently, those price levels will not be visible in the local order book even when applying all updates from the Diff. Depth Stream correctly and cause the local order book to have some slight differences with the real order book. 
+Due to depth snapshots having a limit on the number of price levels, a price level outside of the initial snapshot that doesn't have a quantity change won't have an update in the Diff. Depth Stream. Consequently, those price levels will not be visible in the local order book even when applying all updates from the Diff. Depth Stream correctly and cause the local order book to have some slight differences with the real order book.
